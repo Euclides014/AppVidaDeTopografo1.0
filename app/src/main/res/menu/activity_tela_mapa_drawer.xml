@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_video"
+            android:icon="@drawable/ic_video"
+            android:title="Vídeos Educacionais"/>
+        <item
+            android:id="@+id/nav_ebooks"
+            android:icon="@drawable/ic_books"
+            android:title="Ebooks"/>
+        <item
+            android:id="@+id/nav_form"
+            android:icon="@drawable/ic_form_enable"
+            android:title="Cadastro Profissional"/>
+        <item
+            android:id="@+id/nav_perfil"
+            android:icon="@drawable/ic_perfil"
+            android:title="Ver perfil"/>
+
+    </group>
+
+</menu>

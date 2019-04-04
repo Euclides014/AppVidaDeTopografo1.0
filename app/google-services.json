@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "450464050676",
+    "firebase_url": "https://applicationvidadetopografo.firebaseio.com",
+    "project_id": "applicationvidadetopografo",
+    "storage_bucket": "applicationvidadetopografo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:450464050676:android:006b470581efa3d6",
+        "android_client_info": {
+          "package_name": "com.example.applicationvidadetopografo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "450464050676-c1v3u1tbug592t80rj53u8jvdgih7aof.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.applicationvidadetopografo",
+            "certificate_hash": "b6f1f24ae31dbe2a62caa48b1837b7c70c6855ab"
+          }
+        },
+        {
+          "client_id": "450464050676-vst100a09493lggturmbvj2l929f0qi9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzd_q7GtrXrxcBbKRBo5yrV2l6i8vuHps"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "450464050676-vst100a09493lggturmbvj2l929f0qi9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Vida de Topógrafo</string>
+    <string name="title_activity_principal_maps">Map</string>
+    <string name="title_activity_principal">Menu de opções</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_tela_mapa">Vida de Topográfo</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="facebook_app_id">588317711684866</string>
+    <string name="fb_login_protocol_scheme">fb588317711684866</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="bootstrap_dropdown_example_data">
+        <item>Selecione a escolaridade</item>
+        <item>Pós-Graduação completa</item>
+        <item>Pós-Graduação incompleta</item>
+        <item>Ensino superior completo</item>
+        <item>Ensino superior incompleto</item>
+        <item>Ensino médio completo</item>
+        <item>Ensino médio incompleto</item>
+        <item>Ensino fundamental completo</item>
+        <item>Ensino fundamental incompleto</item>
+
+    </string-array>
+</resources>
