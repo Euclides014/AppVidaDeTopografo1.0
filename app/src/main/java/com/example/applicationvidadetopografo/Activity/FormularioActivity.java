@@ -86,7 +86,7 @@ public class FormularioActivity extends AppCompatActivity {
     private CheckBox checkExpSoftTBC, checkExpSoftQG, checkExpSoftTT, checkExpSoftPS, checkExpSoftGM;
     private CheckBox checkCLT, checkPJ, checkFreelancer;
 
-    private BootstrapButton btnConclui, btnCancel;
+    private BootstrapButton btnConclui, btnCancel, btEnviaCurriculo;
 
     private static final long UPDATE_INTERVAL = 10000;
     private static final long FASTEST_INTERVAL = 5000;
@@ -136,6 +136,7 @@ public class FormularioActivity extends AppCompatActivity {
                 R.id.edtCadtEstado);
 
         btnConclui = (BootstrapButton) findViewById(R.id.btnConclui);
+        btEnviaCurriculo =(BootstrapButton) findViewById(R.id.btnEnviarCurriculo);
         btnCancel = (BootstrapButton) findViewById(R.id.btnCancel);
 
         btnConclui.setOnClickListener(new View.OnClickListener() {
@@ -152,6 +153,19 @@ public class FormularioActivity extends AppCompatActivity {
 
             }
         });
+        btEnviaCurriculo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                preencheDadosUsuario();
+                cadastrarFotoUsuario();
+                cadastrarUsuario(usuario);
+                limparCampos();
+                Intent intent = new Intent(FormularioActivity.this, UploadCurriculo.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override

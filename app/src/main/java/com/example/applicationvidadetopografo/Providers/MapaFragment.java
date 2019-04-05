@@ -41,6 +41,7 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
     private String nome;
     private String latitude;
     private String longitude;
+    private String profissao;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -84,9 +85,23 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
         } catch (Exception exep) {
 
         }
-
         mMap = googleMap;
-        percorrerBanco();
+        customAddMarker();
+
+        //Eventos
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                return false;
+            }
+        });
+
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+
+            }
+        });
 
     }
 
@@ -115,7 +130,7 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
 
     }
 
-    private void percorrerBanco() {
+    private void customAddMarker() {
         reference = FirebaseDatabase.getInstance().getReference();
         reference.child("usuarios").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

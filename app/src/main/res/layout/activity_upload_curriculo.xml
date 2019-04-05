@@ -37,14 +37,14 @@
 
     <com.beardedhen.androidbootstrap.BootstrapButton
         android:id="@+id/btnUploadArq"
-        android:layout_width="320dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="6dp"
         android:layout_marginEnd="20dp"
         android:text="Envie seu currículo"
-        app:bootstrapSize="lg"
         app:bootstrapBrand="success"
+        app:bootstrapSize="lg"
         app:buttonMode="regular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,19 +53,19 @@
         app:showOutline="false" />
 
     <com.beardedhen.androidbootstrap.BootstrapButton
-        app:bootstrapBrand="danger"
-        app:bootstrapSize="lg"
-        app:buttonMode="regular"
-        app:showOutline="false"
-        app:roundedCorners="true"
         android:id="@+id/btnCancelUpload"
-        android:layout_width="319dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="6dp"
         android:layout_marginEnd="20dp"
         android:text="Cancelar"
+        app:bootstrapBrand="danger"
+        app:bootstrapSize="lg"
+        app:buttonMode="regular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnUploadArq" />
+        app:layout_constraintTop_toBottomOf="@+id/btnUploadArq"
+        app:roundedCorners="true"
+        app:showOutline="false" />
 </android.support.constraint.ConstraintLayout>

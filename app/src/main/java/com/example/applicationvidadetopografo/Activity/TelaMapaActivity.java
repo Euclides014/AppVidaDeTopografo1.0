@@ -1,6 +1,7 @@
 package com.example.applicationvidadetopografo.Activity;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -96,8 +98,26 @@ public class TelaMapaActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.ic_logoff){
-            deslogarUsuario();
-            deslogarUsuarioGoogle();
+            AlertDialog.Builder alert = new AlertDialog.Builder(TelaMapaActivity.this);
+            alert.setTitle("Logoff");
+            alert.setIcon(R.drawable.ic_aviso)
+                    .setMessage("Quer mesmo fazer logoff?")
+                    .setCancelable(false)
+                    .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            deslogarUsuario();
+                            deslogarUsuarioGoogle();
+                        }
+                    });
+            AlertDialog alertDialog = alert.create();
+            alertDialog.show();
         }
 
         return super.onOptionsItemSelected(item);
