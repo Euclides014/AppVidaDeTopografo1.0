@@ -131,6 +131,8 @@ public class TelaMapaActivity extends AppCompatActivity
          if (id == R.id.nav_video) {
              gotoYoutuber();
          } else if (id == R.id.nav_ebooks){
+             Intent intent = new Intent(TelaMapaActivity.this, GaleriaEbookActivity.class);
+             startActivity(intent);
 
          } else if (id == R.id.nav_form){
              goToForm();

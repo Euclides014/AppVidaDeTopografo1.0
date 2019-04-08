@@ -74,7 +74,7 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot s : dataSnapshot.getChildren()){
-                    ocupacao = (ArrayList<String>) s.child("usuario").child("ocupacao").getValue();
+                    ocupacao = (ArrayList<String>) s.child("ocupacao").getValue();
                 }
             }
 

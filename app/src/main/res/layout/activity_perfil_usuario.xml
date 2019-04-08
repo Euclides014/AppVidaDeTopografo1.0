@@ -18,17 +18,18 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorSecondary">
+            android:background="@color/colorSecondary"
+            app:layout_constraintBottom_toTopOf="@+id/textView18"
+            app:layout_constraintTop_toTopOf="@+id/textView18">
 
             <ImageView
                 android:id="@+id/imageView5"
-                android:layout_width="140dp"
+                android:layout_width="120dp"
                 android:layout_height="140dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/iconconstruction" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -196,20 +197,18 @@
                 android:textSize="18sp"
                 app:layout_constraintEnd_toStartOf="@+id/textView19"
                 app:layout_constraintStart_toEndOf="@+id/textView18"
-                app:layout_constraintTop_toBottomOf="@+id/txtEnderecoUsuario" />
+                app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
             <TextView
                 android:id="@+id/textView19"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
                 android:layout_marginTop="14dp"
                 android:layout_marginEnd="4dp"
                 android:text="Cidade:"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/txtCidadeUsuario"
-                app:layout_constraintStart_toEndOf="@+id/txtBairroUsuario"
                 app:layout_constraintTop_toBottomOf="@+id/txtEnderecoUsuario" />
 
             <TextView
@@ -268,12 +267,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="14dp"
                 android:text="Ocupação: "
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView31" />
+                app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
             <ListView
                 android:id="@+id/listViewOcupacao"
@@ -284,6 +283,54 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView32" />
+
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="14dp"
+                android:text="Tempo de Experiênica:"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/listViewOcupacao" />
+
+            <TextView
+                android:id="@+id/txtExperienciaUsuario"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="8dp"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView22"
+                app:layout_constraintTop_toBottomOf="@+id/listViewOcupacao" />
+
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="14dp"
+                android:text="Escolaridade:"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView31" />
+
+            <TextView
+                android:id="@+id/txtEscolaridadeUsuario"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="8dp"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView24"
+                app:layout_constraintTop_toBottomOf="@+id/textView31" />
 
         </android.support.constraint.ConstraintLayout>
 

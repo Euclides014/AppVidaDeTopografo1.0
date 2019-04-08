@@ -364,44 +364,18 @@
                 app:layout_constraintTop_toBottomOf="@+id/checkAux" />
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/textInputLayout12"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view5">
-
-                <com.beardedhen.androidbootstrap.BootstrapEditText
-                    android:id="@+id/edtCadtExperiencia"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Trabalha deste:"
-                    app:bootstrapBrand="info"
-                    app:bootstrapSize="md"
-                    app:roundedCorners="true" />
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
                 android:id="@+id/SelectEscolaridade"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout12">
+                app:layout_constraintTop_toBottomOf="@+id/btnCalendar">
 
-                <com.beardedhen.androidbootstrap.BootstrapDropDown
+                <Spinner
                     android:id="@+id/selecEscolaridade"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:bootstrapBrand="regular"
-                    app:bootstrapExpandDirection="down"
-                    app:bootstrapSize="md"
-                    app:bootstrapText="Selecione a escolaridade:"
-                    app:dropdownResource="@array/bootstrap_dropdown_example_data"
-                    app:roundedCorners="true" />
+                    android:layout_height="wrap_content" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -1021,6 +995,37 @@
                     android:layout_weight="1"
                     android:text="por Endereço" />
             </RadioGroup>
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="4dp"
+                android:text="Trabalha deste:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view5" />
+
+            <ImageView
+                android:id="@+id/btnCalendar"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="17dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view5"
+                app:srcCompat="@drawable/icon_calendar" />
+
+            <TextView
+                android:id="@+id/showDateSelect"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/btnCalendar"
+                app:layout_constraintStart_toEndOf="@+id/textView21"
+                app:layout_constraintTop_toBottomOf="@+id/view5" />
 
 
         </android.support.constraint.ConstraintLayout>

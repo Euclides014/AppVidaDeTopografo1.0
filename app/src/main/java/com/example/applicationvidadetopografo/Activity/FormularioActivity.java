@@ -3,6 +3,7 @@ package com.example.applicationvidadetopografo.Activity;
 import android.Manifest;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 
@@ -20,9 +21,14 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
@@ -52,6 +58,7 @@ import com.squareup.picasso.Picasso;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -73,7 +80,7 @@ public class FormularioActivity extends AppCompatActivity {
     private BootstrapEditText estado;
     private BootstrapEditText edtCadExpSoft;
     private BootstrapEditText edtCadInfor;
-    private BootstrapDropDown selectEscolaridade;
+    private Spinner selectEscolaridade;
     private ArrayList<String> listaOcupacao = new ArrayList();
     private ArrayList<String> listaEquipamento = new ArrayList<>();
     private ArrayList<String> listaMobilidade = new ArrayList<>();
@@ -99,8 +106,10 @@ public class FormularioActivity extends AppCompatActivity {
     private LocationRequest mLocationRequest;
 
     private Double latitude;
-    private ImageView imageView;
+    private ImageView imageView, btnCalendar;
+    private TextView exibirData;
     private String emailUsuarioLogado;
+    private int tempoDeExp;
     private FirebaseAuth autenticacao;
     private StorageReference storageReference;
     private Double longitude;
@@ -118,15 +127,29 @@ public class FormularioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario);
 
-        recuperarvalores();
         startLocationUpdates();
-        toLocation();
+
+        Spinner spEscolaridade = (Spinner) findViewById(R.id.selecEscolaridade);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter
+                .createFromResource(this, R.array.bootstrap_dropdown_example_data,
+                        android.R.layout.simple_spinner_item);
+        spEscolaridade.setAdapter(adapter);
+        recuperarvalores();
 
         storageReference = ConfiguracaoFirebase.getFirebaseStorageReference();
         autenticacao = ConfiguracaoFirebase.getFirebaseAuth();
         emailUsuarioLogado = autenticacao.getCurrentUser().getEmail();
         imageView = (ImageView) findViewById(R.id.imagePerfil);
+        btnCalendar = (ImageView) findViewById(R.id.btnCalendar);
+        exibirData = (TextView) findViewById(R.id.showDateSelect);
         carregaImagemPadrao();
+
+        btnCalendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pegarData();
+            }
+        });
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -185,6 +208,39 @@ public class FormularioActivity extends AppCompatActivity {
         });
     }
 
+    private void pegarData() {
+        Calendar calendar = Calendar.getInstance();
+        int dia = calendar.get(Calendar.DAY_OF_MONTH);
+        int mes = calendar.get(Calendar.MONTH);
+        int ano = calendar.get(Calendar.YEAR);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(FormularioActivity.this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                exibirData.setText(dayOfMonth+"/"+(month+1)+"/"+year);
+                calcularTempoExperiencia(dayOfMonth, month, year);
+            }
+        }, ano,mes,dia);
+        datePickerDialog.show();
+    }
+
+    private void calcularTempoExperiencia(int diaIni, int mesIni, int anoIni){
+        Calendar calendar = Calendar.getInstance();
+        int diaA = calendar.get(Calendar.DAY_OF_MONTH);
+        int mesA = calendar.get(Calendar.MONTH);
+        int anoA = calendar.get(Calendar.YEAR);
+
+        int tempoDeExperiencia = anoA - anoIni;
+        if (mesIni > mesA){
+            tempoDeExperiencia--;
+        } else if (mesA == mesIni){
+            if(diaIni > diaA){
+                tempoDeExperiencia--;
+            }
+        }
+        tempoDeExp = tempoDeExperiencia;
+    }
+
     private void recuperarvalores() {
 
         nome = (BootstrapEditText) findViewById(R.id.edtCadtNome);
@@ -193,11 +249,10 @@ public class FormularioActivity extends AppCompatActivity {
         dataNascimento = (BootstrapEditText) findViewById(R.id.edtCadtDataNasc);
         email = (BootstrapEditText) findViewById(R.id.edtCadtEmail);
         telefone = (BootstrapEditText) findViewById(R.id.edtCadtTel);
-        experiencia = (BootstrapEditText) findViewById(R.id.edtCadtExperiencia);
         cep = (BootstrapEditText) findViewById(R.id.edtCadtCEP);
         edtCadInfor = (BootstrapEditText) findViewById(R.id.edtCadInfor);
         edtCadExpSoft = (BootstrapEditText) findViewById(R.id.edtCadExpSoft);
-        selectEscolaridade = (BootstrapDropDown) findViewById(R.id.selecEscolaridade);
+        selectEscolaridade = (Spinner) findViewById(R.id.selecEscolaridade);
 
         //valores das Checkbox ocupacao
 
@@ -267,7 +322,7 @@ public class FormularioActivity extends AppCompatActivity {
         usuario.setTelefone(telefone.getText().toString());
         usuario.setCpf(cpf.getText().toString());
         usuario.setDataNascimento(dataNascimento.getText().toString());
-        usuario.setTempodeexperiencia(experiencia.getText().toString());
+        usuario.setTempodeexperiencia(String.valueOf(tempoDeExp+"anos"));
         usuario.setInforAdicionais(edtCadInfor.getText().toString());
         usuario.setRua(endereco.getEndereco());
         usuario.setNumero(numero.getText().toString());
@@ -275,6 +330,19 @@ public class FormularioActivity extends AppCompatActivity {
         usuario.setCidade(endereco.getCidade());
         usuario.setEstado(endereco.getEstado());
         usuario.setTipoUsuario("Comum");
+
+        selectEscolaridade.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                usuario.setFormacao((String) selectEscolaridade.getSelectedItem());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
         if (rbDisp.isChecked()) {
             usuario.setDispViagem("Disponível para viagem");
@@ -297,6 +365,7 @@ public class FormularioActivity extends AppCompatActivity {
             usuario.setLatitude(String.valueOf(latitude));
             usuario.setLongitude(String.valueOf(longitude));
         }else if(locTOAddress.isChecked()){
+            toLocation();
             usuario.setLatitude(String.valueOf(endLat));
             usuario.setLongitude(String.valueOf(endLong));
         }
