@@ -280,21 +280,9 @@
                 android:layout_marginStart="3dp"
                 android:layout_marginTop="1dp"
                 android:gravity="center"
-                android:text="Permitir Localização?"
+                android:text="Localização: "
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout11" />
-
-            <CheckBox
-                android:id="@+id/checkBoxLocalizacao"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="21dp"
-                android:text="Sim"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView4"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout11" />
 
             <TextView
@@ -310,8 +298,9 @@
                 android:textColor="@color/bootstrap_brand_secondary_fill"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkBoxLocalizacao" />
+                app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -1009,6 +998,29 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/checkCarro" />
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="238dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toEndOf="@+id/textView4"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout11">
+
+                <RadioButton
+                    android:id="@+id/locToGPS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="por GPS" />
+
+                <RadioButton
+                    android:id="@+id/locToAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="por Endereço" />
+            </RadioGroup>
 
 
         </android.support.constraint.ConstraintLayout>

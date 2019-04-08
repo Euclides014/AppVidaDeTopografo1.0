@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 
 import android.graphics.Bitmap;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 
 import android.net.Uri;
@@ -48,7 +50,10 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 import static com.google.android.gms.location.LocationServices.getFusedLocationProviderClient;
 
@@ -77,7 +82,7 @@ public class FormularioActivity extends AppCompatActivity {
     private ArrayList<String> listadeContratacao = new ArrayList<>();
 
 
-    private RadioButton rbDisp, rbNDisp;
+    private RadioButton rbDisp, rbNDisp, locToGPS, locTOAddress;
 
     private CheckBox checkTopo, checkAux, checkNivl, checkDesen, checkPilot, checkMoto, checkCarro, checkCarroOFFRoad, checkReceptor, checkReceptorGeodesico;
     private CheckBox checkNivel, checkEstacao, checkDrone, checkBoxLocalizacao, checkTeodolito;
@@ -102,7 +107,9 @@ public class FormularioActivity extends AppCompatActivity {
     private DatabaseReference reference;
     private Usuario usuario;
     private Endereco endereco;
+    private String endereçoToLoc;
     private Util util;
+    private Double endLat, endLong;
 
 
 
@@ -113,6 +120,7 @@ public class FormularioActivity extends AppCompatActivity {
 
         recuperarvalores();
         startLocationUpdates();
+        toLocation();
 
         storageReference = ConfiguracaoFirebase.getFirebaseStorageReference();
         autenticacao = ConfiguracaoFirebase.getFirebaseAuth();
@@ -190,7 +198,6 @@ public class FormularioActivity extends AppCompatActivity {
         edtCadInfor = (BootstrapEditText) findViewById(R.id.edtCadInfor);
         edtCadExpSoft = (BootstrapEditText) findViewById(R.id.edtCadExpSoft);
         selectEscolaridade = (BootstrapDropDown) findViewById(R.id.selecEscolaridade);
-        checkBoxLocalizacao = (CheckBox) findViewById(R.id.checkBoxLocalizacao);
 
         //valores das Checkbox ocupacao
 
@@ -246,6 +253,8 @@ public class FormularioActivity extends AppCompatActivity {
 
         rbDisp = (RadioButton) findViewById(R.id.rbDisp);
         rbNDisp = (RadioButton) findViewById(R.id.rbNDisp);
+        locTOAddress = (RadioButton) findViewById(R.id.locToAddress);
+        locToGPS = (RadioButton) findViewById(R.id.locToGPS);
 
         cep.addTextChangedListener(new ZipCodeListener(this));
 
@@ -284,10 +293,14 @@ public class FormularioActivity extends AppCompatActivity {
         }
         usuario.setTipodecontrato(listadeContratacao);
 
-        if (checkBoxLocalizacao.isChecked()) {
+        if (locToGPS.isChecked()) {
             usuario.setLatitude(String.valueOf(latitude));
             usuario.setLongitude(String.valueOf(longitude));
+        }else if(locTOAddress.isChecked()){
+            usuario.setLatitude(String.valueOf(endLat));
+            usuario.setLongitude(String.valueOf(endLong));
         }
+
         if (checkTopo.isChecked()) {
             listaOcupacao.add("Topografo");
         }
@@ -547,5 +560,19 @@ public class FormularioActivity extends AppCompatActivity {
 
     private void setField (int id, String data){
         ((BootstrapEditText) findViewById(id)).setText( data );
+    }
+
+    private void toLocation(){
+        endereçoToLoc = (endereco.getEndereco()+","+usuario.getNumero()+","+endereco.getBairro()+","+endereco.getCidade());
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocationName(endereçoToLoc,1);
+            Address address = addresses.get(0);
+            endLat = address.getLatitude();
+            endLong = address.getLongitude();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
