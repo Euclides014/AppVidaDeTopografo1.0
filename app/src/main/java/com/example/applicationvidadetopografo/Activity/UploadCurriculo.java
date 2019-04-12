@@ -15,16 +15,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
+import com.example.applicationvidadetopografo.Classes.Usuario;
 import com.example.applicationvidadetopografo.DAO.ConfiguracaoFirebase;
 import com.example.applicationvidadetopografo.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -36,13 +43,18 @@ public class UploadCurriculo extends AppCompatActivity {
     private BootstrapButton btnEscolheArq;
     private BootstrapButton btnUploadArq;
     private BootstrapButton btnCancelUpload;
+    private TextView txtArqSelect;
+
     Uri pdfURI;
 
     private FirebaseAuth autenticacao;
     private StorageReference storageReference;
     private String emailUsuarioLogado;
     private FirebaseDatabase database;
+    private Usuario usuario;
+    private String aux;
     ProgressBar progressBar;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +64,7 @@ public class UploadCurriculo extends AppCompatActivity {
         btnEscolheArq = (BootstrapButton) findViewById(R.id.btnEscolheArq);
         btnUploadArq = (BootstrapButton) findViewById(R.id.btnUploadArq);
         btnCancelUpload = (BootstrapButton) findViewById(R.id.btnCancelUpload);
+        txtArqSelect = (TextView) findViewById(R.id.txtArqSelect);
 
         storageReference = ConfiguracaoFirebase.getFirebaseStorageReference();
         autenticacao = ConfiguracaoFirebase.getFirebaseAuth();
@@ -108,22 +121,40 @@ public class UploadCurriculo extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if( requestCode == 86 && resultCode ==RESULT_OK && data !=null){
             pdfURI = data.getData();
+            txtArqSelect.setText(data.getData().getLastPathSegment());
         } else {
             Toast.makeText(UploadCurriculo.this, "Selecione o arquivo", Toast.LENGTH_LONG).show();
         }
     }
 
     private void uploadfile(Uri pdfURI){
-        progressBar = new ProgressBar(this);
-        progressBar.setProgress(0, true);
-        progressBar.isShown();
-        StorageReference uploadCurrículo = storageReference.child("currículoUsuário" + emailUsuarioLogado + "pdf");
+        String fileName = System.currentTimeMillis()+"";
+        StorageReference uploadCurrículo = storageReference.child("curriculo_Usuario").child(fileName + emailUsuarioLogado);
             uploadCurrículo.putFile(pdfURI).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    String url = taskSnapshot.getUploadSessionUri().toString();
-                    DatabaseReference reference = ConfiguracaoFirebase.getFirebase();
-                    Toast.makeText(UploadCurriculo.this,"Currículo enviado com sucesso", Toast.LENGTH_LONG).show();
+                    final String url = taskSnapshot.getUploadSessionUri().toString();
+                    final DatabaseReference reference = ConfiguracaoFirebase.getFirebase();
+                    reference.child("usuarios").orderByChild("email").equalTo(emailUsuarioLogado)
+                            .addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    reference.child("urlCurriculo").setValue(url).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                           if (task.isSuccessful()){
+                                               Toast.makeText(UploadCurriculo.this,"Currículo enviado com sucesso", Toast.LENGTH_LONG).show();
+                                           } else {
+                                               Toast.makeText(UploadCurriculo.this, "Falha ao envia o arquivo", Toast.LENGTH_LONG).show();
+                                           }
+                                        }
+                                    });
+                                }
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
 
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -135,11 +166,9 @@ public class UploadCurriculo extends AppCompatActivity {
                 @Override
                 public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                     int currentProgress = (int) (100*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
-                    progressBar.setProgress(currentProgress);
+                    progressDialog.setProgress(currentProgress);
                 }
             });
-
-
     }
 }
 

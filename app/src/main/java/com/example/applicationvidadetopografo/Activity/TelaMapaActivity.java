@@ -1,9 +1,12 @@
 package com.example.applicationvidadetopografo.Activity;
 
 import android.Manifest;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -11,6 +14,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -21,6 +25,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.applicationvidadetopografo.Providers.MapaFragment;
@@ -52,15 +57,6 @@ public class TelaMapaActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         conectarGoogleApi();
         inicializarFirebase();
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -90,6 +86,16 @@ public class TelaMapaActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.tela_mapa, menu);
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView;
+        MenuItem item = menu.findItem(R.id.action_searchable_activity);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            searchView = (SearchView) item.getActionView();
+        } else {
+            searchView = (SearchView) item.getActionView();
+        }
+        searchView.setSearchableInfo( searchManager.getSearchableInfo( getComponentName()));
+        searchView.setQueryHint(getResources().getString(R.string.search_hint));
         return true;
     }
 
@@ -137,6 +143,8 @@ public class TelaMapaActivity extends AppCompatActivity
          } else if (id == R.id.nav_form){
              goToForm();
          } else if (id == R.id.nav_perfil){
+             Intent intent = new Intent(TelaMapaActivity.this, PerfilUsuarioActivity.class);
+             startActivity(intent);
 
          }
 

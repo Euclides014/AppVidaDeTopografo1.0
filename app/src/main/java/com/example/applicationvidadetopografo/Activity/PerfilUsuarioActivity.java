@@ -33,6 +33,7 @@ import org.w3c.dom.Text;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PerfilUsuarioActivity extends AppCompatActivity {
 
@@ -43,17 +44,19 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
     private TextView txtDataNasc;
     private TextView txtEnderecoUsuario;
     private TextView txtBairroUsuario;
-    private TextView txtCidadeUsuario;
-    private TextView txtEstadoUsuario;
+    private TextView txtCidadeUsuario, txtExpEquipUsuario, txtDispViagemUsuario, txtExpSoftUsuario;
+    private TextView txtEstadoUsuario, txtEscolaridadeUsuario, txtOcupUsuario, txtExperienciaUsuario;
     private ImageView imageView;
 
     private FirebaseAuth autenticacao;
     private DatabaseReference reference;
     private StorageReference storageReference;
 
-    private String emailUsarioLogado;
-    private ListView recycleViewOcupacao;
+    private String emailUsarioLogado, strOcupacao, strEquip, strSoft;
+    private String strAux;
     private ArrayList<String> ocupacao = new ArrayList<>();
+    private ArrayList<String> equipamentos = new ArrayList<>();
+    private ArrayList<String> software = new ArrayList<>();
 
 
     @Override
@@ -64,27 +67,6 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
         autenticacao = FirebaseAuth.getInstance();
         reference = ConfiguracaoFirebase.getFirebase();
         emailUsarioLogado = autenticacao.getCurrentUser().getEmail();
-        recycleViewOcupacao = (ListView) findViewById(R.id.listViewOcupacao);
-
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ocupacao);
-        recycleViewOcupacao.setAdapter(adapter);
-
-        reference.child("usuarios").child("ocupacao").addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot s : dataSnapshot.getChildren()){
-                    ocupacao = (ArrayList<String>) s.child("ocupacao").getValue();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
 
         recuperarValores();
         consultaBanco();
@@ -101,6 +83,13 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
         txtBairroUsuario = (TextView) findViewById(R.id.txtBairroUsuario);
         txtCidadeUsuario = (TextView) findViewById(R.id.txtCidadeUsuario);
         txtEstadoUsuario = (TextView) findViewById(R.id.txtEstadoUsuario);
+        txtEscolaridadeUsuario = (TextView) findViewById(R.id.txtEscolaridadeUsuario);
+        txtOcupUsuario = (TextView) findViewById(R.id.txtOcupUsuario);
+        txtExperienciaUsuario = (TextView) findViewById(R.id.txtExperienciaUsuario);
+        txtExpEquipUsuario = (TextView) findViewById(R.id.txtExpEquipUsuario);
+        txtDispViagemUsuario = (TextView) findViewById(R.id.txtDispViagemUsuario);
+        txtExpSoftUsuario = (TextView) findViewById(R.id.txtExpSoftUsuario);
+
         imageView = (ImageView) findViewById(R.id.imageView5);
     }
 
@@ -109,20 +98,42 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for (DataSnapshot postSnapShot : dataSnapshot.getChildren()){
-                            Usuario usuario = postSnapShot.getValue(Usuario.class);
-                            txtNomeUsuario.setText(usuario.getNome());
-                            txtCpfUsuario.setText(usuario.getCpf());
-                            txtEmailUsuario.setText(usuario.getEmail());
-                            txtTelefUsuario.setText(usuario.getTelefone());
-                            txtDataNasc.setText(usuario.getDataNascimento());
-                            txtEnderecoUsuario.setText(usuario.getRua() + "," + usuario.getNumero());
-                            txtBairroUsuario.setText(usuario.getBairro());
-                            txtCidadeUsuario.setText(usuario.getCidade());
-                            txtEstadoUsuario.setText(usuario.getEstado());
+                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
+                            txtNomeUsuario.setText(postSnapshot.child("nome").getValue().toString());
+                            txtCpfUsuario.setText(postSnapshot.child("cpf").getValue().toString());
+                            txtEmailUsuario.setText(postSnapshot.child("email").getValue().toString());
+                            txtTelefUsuario.setText(postSnapshot.child("telefone").getValue().toString());
+                            txtDataNasc.setText(postSnapshot.child("dataNascimento").getValue().toString());
+                            txtEnderecoUsuario.setText(postSnapshot.child("rua").getValue().toString()+","+ postSnapshot.child("numero").getValue().toString());
+                            txtBairroUsuario.setText(postSnapshot.child("bairro").getValue().toString());
+                            txtCidadeUsuario.setText(postSnapshot.child("cidade").getValue().toString());
+                            txtEstadoUsuario.setText(postSnapshot.child("estado").getValue().toString());
+                            txtExperienciaUsuario.setText(postSnapshot.child("tempodeexperiencia").getValue().toString());
+                            txtDispViagemUsuario.setText(postSnapshot.child("dispViagem").getValue().toString());
+
+                            ocupacao = (ArrayList<String>) postSnapshot.child("ocupacao").getValue();
+                            equipamentos = (ArrayList<String>) postSnapshot.child("expEquipamentos").getValue();
+                            software = (ArrayList<String>) postSnapshot.child("softExp").getValue();
+                            strOcupacao = ocupacao.toString();
+                            strEquip = equipamentos.toString();
+                            strSoft = software.toString();
+
+                            strAux = strOcupacao.replace("[","");
+                            strAux = strAux.replace("]","");
+                            strOcupacao = strAux;
+                            txtOcupUsuario.setText(strOcupacao);
+
+                            strAux = strEquip.replace("[","");
+                            strAux = strAux.replace("]","");
+                            strEquip = strAux;
+                            txtExpEquipUsuario.setText(strEquip);
+
+                            strAux = strSoft.replace("[","");
+                            strAux = strAux.replace("]","");
+                            strSoft = strAux;
+                            txtExpSoftUsuario.setText(strSoft);
                         }
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                         Toast.makeText(PerfilUsuarioActivity.this,"Erro de conexão com banco de dados", Toast.LENGTH_LONG).show();

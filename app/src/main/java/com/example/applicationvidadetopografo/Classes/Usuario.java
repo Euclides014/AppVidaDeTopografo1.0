@@ -35,6 +35,8 @@ public class Usuario {
     private String longitude;
     private String dispViagem;
     private String inforAdicionais;
+    private String urlPerfil;
+    private String urlCurriculo;
 
 
     public String getCep() {
@@ -253,5 +255,21 @@ public class Usuario {
 
     public void setTipodecontrato(ArrayList<String> tipodecontrato) {
         this.tipodecontrato = tipodecontrato;
+    }
+
+    public String getUrlPerfil() {
+        return urlPerfil;
+    }
+
+    public void setUrlPerfil(String urlPerfil) {
+        this.urlPerfil = urlPerfil;
+    }
+
+    public String getUrlCurriculo() {
+        return urlCurriculo;
+    }
+
+    public void setUrlCurriculo(String urlCurriculo) {
+        this.urlCurriculo = urlCurriculo;
     }
 }

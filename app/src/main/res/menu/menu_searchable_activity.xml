@@ -2,21 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <item
         android:id="@+id/action_searchable_activity"
-        android:icon="@drawable/ic_search_black_24dp"
+        android:icon="@drawable/ic_search_white_24dp"
         android:title="@string/action_searchable_activity"
         app:actionViewClass="android.widget.SearchView"
         app:showAsAction="ifRoom|collapseActionView" />
-
-    <item android:id="@+id/ic_logoff"
-        android:title="Logoff"
-        android:icon="@drawable/ic_logout"
-        app:showAsAction="always">
-
-    </item>
-
 
 
 

@@ -16,6 +16,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_hint">Buscar</string>
+    <string name="action_searchable_activity">Buscar:</string>
+    <string name="app_label">Vida de Topógrafo</string>
     <string-array name="bootstrap_dropdown_example_data">
         <item>Selecione a escolaridade</item>
         <item>Pós-Graduação completa</item>

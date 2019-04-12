@@ -11,29 +11,31 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginStart="105dp"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="68dp"
         android:layout_marginEnd="105dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/icondocpdf" />
 
     <com.beardedhen.androidbootstrap.BootstrapButton
-        app:bootstrapBrand="warning"
-        app:bootstrapSize="lg"
-        app:buttonMode="regular"
-        app:showOutline="false"
-        app:roundedCorners="true"
         android:id="@+id/btnEscolheArq"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="14dp"
         android:layout_marginEnd="20dp"
         android:text="Escolha o arquivo"
+        app:bootstrapBrand="warning"
+        app:bootstrapSize="lg"
+        app:buttonMode="regular"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/txtArqSelect"
+        app:roundedCorners="true"
+        app:showOutline="false" />
 
     <com.beardedhen.androidbootstrap.BootstrapButton
         android:id="@+id/btnUploadArq"
@@ -68,4 +70,26 @@
         app:layout_constraintTop_toBottomOf="@+id/btnUploadArq"
         app:roundedCorners="true"
         app:showOutline="false" />
+
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="32dp"
+        android:text="Arquivo Selecionado:"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <TextView
+        android:id="@+id/txtArqSelect"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="20dp"
+        android:text="Arquivo não selecionado"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView25"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView25" />
 </android.support.constraint.ConstraintLayout>

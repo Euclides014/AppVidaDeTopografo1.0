@@ -31,6 +31,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class MapaFragment extends SupportMapFragment implements OnMapReadyCallback,
         GoogleMap.OnMapClickListener, LocationListener {
 
@@ -41,7 +43,9 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
     private String nome;
     private String latitude;
     private String longitude;
+    private String profissaoAux;
     private String profissao;
+    private ArrayList<String> ocupacao = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -140,6 +144,10 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
                         nome = s.child("nome").getValue().toString();
                         latitude = s.child("latitude").getValue().toString();
                         longitude = s.child("longitude").getValue().toString();
+                        ocupacao = (ArrayList<String>) s.child("ocupacao").getValue();
+                        profissaoAux = ocupacao.toString();
+                        profissaoAux = profissaoAux.replace("[","");
+                        profissao = profissaoAux.replace("]","");
                         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
                         Criteria criteria = new Criteria();
                         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
@@ -149,11 +157,16 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
                         }
                         Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
                         LatLng zoom2 = new LatLng(location.getLatitude(), location.getLongitude());
-                        marker = mMap.addMarker(new MarkerOptions()
-                                .position(new LatLng(Double.valueOf(latitude), Double.valueOf(longitude)))
-                                .title(nome));
+                        if(latitude == null && longitude == null ){
+                            marker.remove();
+                        } else {
+                            marker = mMap.addMarker(new MarkerOptions()
+                                    .position(new LatLng(Double.valueOf(latitude), Double.valueOf(longitude)))
+                                    .title(nome)
+                                    .snippet(profissao));
 
-                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(zoom2, 8));
+                            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(zoom2, 10));
+                        }
                     }
                 }else {
                     Log.i("Eu passei aqui!", "Deu erro" );
