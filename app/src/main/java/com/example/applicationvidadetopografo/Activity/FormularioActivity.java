@@ -177,7 +177,6 @@ public class FormularioActivity extends AppCompatActivity {
                 preencheDadosUsuario();
                 cadastrarFotoUsuario();
                 cadastrarUsuario(usuario);
-                limparCampos();
                 Intent intent = new Intent(FormularioActivity.this, TelaMapaActivity.class);
                 startActivity(intent);
                 finish();
@@ -190,7 +189,6 @@ public class FormularioActivity extends AppCompatActivity {
                 preencheDadosUsuario();
                 cadastrarFotoUsuario();
                 cadastrarUsuario(usuario);
-                limparCampos();
                 Intent intent = new Intent(FormularioActivity.this, UploadCurriculo.class);
                 startActivity(intent);
                 finish();
@@ -250,7 +248,11 @@ public class FormularioActivity extends AppCompatActivity {
         email = (BootstrapEditText) findViewById(R.id.edtCadtEmail);
         telefone = (BootstrapEditText) findViewById(R.id.edtCadtTel);
         cep = (BootstrapEditText) findViewById(R.id.edtCadtCEP);
-        edtCadInfor = (BootstrapEditText) findViewById(R.id.edtCadInfor);
+        rua = (BootstrapEditText) findViewById(R.id.edtCadtEndereco);
+        bairro = (BootstrapEditText) findViewById(R.id.edtCadtBairro);
+        cidade = (BootstrapEditText) findViewById(R.id.edtCadtCidade);
+        estado = (BootstrapEditText) findViewById(R.id.edtCadtEstado);
+        edtCadInfor = findViewById(R.id.edtCadInfor);
         edtCadExpSoft = (BootstrapEditText) findViewById(R.id.edtCadExpSoft);
         selectEscolaridade = (Spinner) findViewById(R.id.selecEscolaridade);
 
@@ -323,12 +325,15 @@ public class FormularioActivity extends AppCompatActivity {
         usuario.setCpf(cpf.getText().toString());
         usuario.setDataNascimento(dataNascimento.getText().toString());
         usuario.setTempodeexperiencia(String.valueOf(tempoDeExp+"anos"));
+        if (edtCadInfor.getText() == null){
+            edtCadInfor.setText("");
+        }
         usuario.setInforAdicionais(edtCadInfor.getText().toString());
-        usuario.setRua(endereco.getEndereco());
+        usuario.setRua(rua.getText().toString());
         usuario.setNumero(numero.getText().toString());
-        usuario.setBairro(endereco.getBairro());
-        usuario.setCidade(endereco.getCidade());
-        usuario.setEstado(endereco.getEstado());
+        usuario.setBairro(bairro.getText().toString());
+        usuario.setCidade(cidade.getText().toString());
+        usuario.setEstado(estado.getText().toString());
         usuario.setTipoUsuario("Comum");
 
         selectEscolaridade.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -555,21 +560,6 @@ public class FormularioActivity extends AppCompatActivity {
         }
     }
 
-    private void limparCampos() {
-        nome.setText("");
-        cpf.setText("");
-        dataNascimento.setText("");
-        email.setText("");
-        telefone.setText("");
-        experiencia.setText("");
-        cep.setText("");
-        rua.setText("");
-        numero.setText("");
-        bairro.setText("");
-        cidade.setText("");
-        estado.setText("");
-    }
-
     protected void startLocationUpdates() {
 
         // Create the location request to start receiving updates
@@ -632,7 +622,7 @@ public class FormularioActivity extends AppCompatActivity {
     }
 
     private void toLocation(){
-        endereçoToLoc = (endereco.getEndereco()+","+usuario.getNumero()+","+endereco.getBairro()+","+endereco.getCidade());
+        endereçoToLoc = (cep.getText().toString());
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
         try {
             List<Address> addresses = geocoder.getFromLocationName(endereçoToLoc,1);

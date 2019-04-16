@@ -1,6 +1,9 @@
 package com.example.applicationvidadetopografo.DAO;
 
+import android.support.annotation.NonNull;
+
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -10,6 +13,8 @@ public class ConfiguracaoFirebase {
 
     private static DatabaseReference referenciaFirebase;
     private static FirebaseAuth autenticacao;
+    private static FirebaseAuth.AuthStateListener authStateListener;
+    private static FirebaseUser firebaseUser;
     private static FirebaseStorage storage;
     private static StorageReference referenceStorage;
 
@@ -22,7 +27,7 @@ public class ConfiguracaoFirebase {
 
     public static FirebaseAuth getFirebaseAuth(){
         if( autenticacao == null){
-            autenticacao = FirebaseAuth.getInstance();
+            inicializarFirebaseAuth();
         }
         return autenticacao;
     }
@@ -39,5 +44,27 @@ public class ConfiguracaoFirebase {
             referenceStorage = FirebaseStorage.getInstance().getReference();
         }
         return  referenceStorage;
+    }
+
+    private static void inicializarFirebaseAuth(){
+        autenticacao = FirebaseAuth.getInstance();
+        authStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if(user != null){
+                    firebaseUser = user;
+                }
+            }
+        };
+        autenticacao.addAuthStateListener(authStateListener);
+    }
+
+    public static FirebaseUser getFirebaseUser(){
+        return firebaseUser;
+    }
+
+    public static void logOut(){
+        autenticacao.signOut();
     }
 }

@@ -23,20 +23,24 @@
         android:roundIcon="@drawable/icon_app"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Activity.PerfilUsersActivity"></activity>
 
-        <meta-data android:name="android.app.default_searchable"
-            android:value=".Activity.SearchableActivity"/>
+        <meta-data
+            android:name="android.app.default_searchable"
+            android:value=".Activity.SearchableActivity" />
 
-        <activity android:name=".Activity.SearchableActivity"
-                  android:windowSoftInputMode="adjustPan|adjustNothing"
-                  android:launchMode="singleTop">
+        <activity
+            android:name=".Activity.SearchableActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan|adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
-            <meta-data android:name="android.app.searchable"
-                android:resource="@xml/searchable"/>
-        </activity>
 
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
         <activity android:name=".Activity.PerfilUsuarioActivity" />
         <activity android:name=".Activity.GaleriaEbookActivity" />
         <activity android:name=".Activity.UploadCurriculo" />
@@ -70,7 +74,7 @@
             android:name=".Activity.TelaMapaActivity"
             android:label="@string/title_activity_tela_mapa"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan|adjustNothing"/>
+            android:windowSoftInputMode="adjustPan|adjustNothing" />
         <activity
             android:name=".Activity.FormularioActivity"
             android:windowSoftInputMode="adjustPan|adjustNothing" />
@@ -78,7 +82,6 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
@@ -89,6 +92,7 @@
             android:windowSoftInputMode="adjustPan|adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

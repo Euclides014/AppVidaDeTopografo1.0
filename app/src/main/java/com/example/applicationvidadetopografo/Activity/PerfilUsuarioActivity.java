@@ -1,20 +1,13 @@
 package com.example.applicationvidadetopografo.Activity;
 
-import android.app.usage.NetworkStatsManager;
-import android.graphics.Bitmap;
 import android.net.Uri;
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.applicationvidadetopografo.Classes.Usuario;
 import com.example.applicationvidadetopografo.DAO.ConfiguracaoFirebase;
 import com.example.applicationvidadetopografo.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -26,14 +19,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
-import java.util.List;
 
 public class PerfilUsuarioActivity extends AppCompatActivity {
 
@@ -80,13 +68,13 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
         txtTelefUsuario = (TextView) findViewById(R.id.txtTelefUsuario);
         txtDataNasc = (TextView) findViewById(R.id.txtDataNasc);
         txtEnderecoUsuario = (TextView) findViewById(R.id.txtEnderecoUsuario);
-        txtBairroUsuario = (TextView) findViewById(R.id.txtBairroUsuario);
+        txtBairroUsuario = (TextView) findViewById(R.id.txtBairroUser);
         txtCidadeUsuario = (TextView) findViewById(R.id.txtCidadeUsuario);
-        txtEstadoUsuario = (TextView) findViewById(R.id.txtEstadoUsuario);
-        txtEscolaridadeUsuario = (TextView) findViewById(R.id.txtEscolaridadeUsuario);
-        txtOcupUsuario = (TextView) findViewById(R.id.txtOcupUsuario);
-        txtExperienciaUsuario = (TextView) findViewById(R.id.txtExperienciaUsuario);
-        txtExpEquipUsuario = (TextView) findViewById(R.id.txtExpEquipUsuario);
+        txtEstadoUsuario = (TextView) findViewById(R.id.txtEstadoUser);
+        txtEscolaridadeUsuario = (TextView) findViewById(R.id.txtEscolaridadeUser);
+        txtOcupUsuario = (TextView) findViewById(R.id.txtOcupUser);
+        txtExperienciaUsuario = (TextView) findViewById(R.id.txtExperienciaUser);
+        txtExpEquipUsuario = (TextView) findViewById(R.id.txtExpEquipUser);
         txtDispViagemUsuario = (TextView) findViewById(R.id.txtDispViagemUsuario);
         txtExpSoftUsuario = (TextView) findViewById(R.id.txtExpSoftUsuario);
 

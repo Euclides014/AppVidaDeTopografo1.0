@@ -26,8 +26,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.applicationvidadetopografo.DAO.ConfiguracaoFirebase;
 import com.example.applicationvidadetopografo.Providers.MapaFragment;
 import com.example.applicationvidadetopografo.R;
 import com.google.android.gms.auth.api.Auth;
@@ -38,6 +40,7 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 
 public class TelaMapaActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.OnConnectionFailedListener {
@@ -47,7 +50,11 @@ public class TelaMapaActivity extends AppCompatActivity
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     private FirebaseUser mFirebaseUser;
+    private DatabaseReference reference;
     private GoogleApiClient mGoogleApiClient;
+    private String emailUser;
+
+    private TextView txt_Email_User;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,20 +64,26 @@ public class TelaMapaActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         conectarGoogleApi();
         inicializarFirebase();
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        emailUser = mFirebaseAuth.getCurrentUser().getEmail();
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
+
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        txt_Email_User = headerView.findViewById(R.id.txt_Email_User);
+        txt_Email_User.setText(emailUser);
         navigationView.setNavigationItemSelectedListener(this);
 
         fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(R.id.mapaconteiner, new MapaFragment(), "MapaFragment");
         transaction.commitAllowingStateLoss();
-
     }
 
     @Override
@@ -164,7 +177,6 @@ public class TelaMapaActivity extends AppCompatActivity
         super.onStop();
         mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
     }
-
 
     private void inicializarFirebase() {
         mFirebaseAuth = FirebaseAuth.getInstance();

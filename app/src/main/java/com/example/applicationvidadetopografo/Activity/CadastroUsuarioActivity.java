@@ -70,6 +70,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                     cadastroUsuario();
 
                     if(insereUsuario(usuario) == true){
+                        autenticacao.signOut();
                         Intent intent = new Intent(CadastroUsuarioActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
@@ -101,6 +102,8 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
+                    insereUsuario(usuario);
+                }else{
                     String erroExcecao = "";
                     try{
                         throw task.getException();
@@ -115,9 +118,6 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     Toast.makeText(CadastroUsuarioActivity.this, "Erro: " + erroExcecao, Toast.LENGTH_LONG).show();
-                    insereUsuario(usuario);
-                }else{
-
                 }
             }
         });

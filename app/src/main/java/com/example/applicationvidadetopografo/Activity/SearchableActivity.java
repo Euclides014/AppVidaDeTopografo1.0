@@ -12,6 +12,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
@@ -26,6 +27,12 @@ import android.widget.Toast;
 
 import com.example.applicationvidadetopografo.DAO.ConfiguracaoFirebase;
 import com.example.applicationvidadetopografo.R;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -44,11 +51,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import static com.google.android.gms.location.LocationServices.getFusedLocationProviderClient;
+
 public class SearchableActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private Marker marker;
-    private Context context;
     private LocationManager locationManager;
     private DatabaseReference reference;
 
@@ -63,7 +71,13 @@ public class SearchableActivity extends AppCompatActivity implements OnMapReadyC
     private Toolbar toolbar;
     private Double endLat;
     private Double endLong;
+    private Double latCurrent;
+    private Double longCurrent;
     private String aux;
+
+    private static final long UPDATE_INTERVAL = 10000;
+    private static final long FASTEST_INTERVAL = 5000;
+    private LocationRequest mLocationRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +86,7 @@ public class SearchableActivity extends AppCompatActivity implements OnMapReadyC
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        startLocationUpdates();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -109,6 +124,14 @@ public class SearchableActivity extends AppCompatActivity implements OnMapReadyC
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+        mMap.getUiSettings().setMyLocationButtonEnabled(true);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        mMap.setMyLocationEnabled(true);
         handleSearch2(getIntent());
 
     }
@@ -136,15 +159,12 @@ public class SearchableActivity extends AppCompatActivity implements OnMapReadyC
                         profissaoAux = profissaoAux.replace("[", "");
                         profissao = profissaoAux.replace("]", "");
                         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                        Criteria criteria = new Criteria();
                         if (ActivityCompat.checkSelfPermission(SearchableActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
                                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(SearchableActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)
                                 != PackageManager.PERMISSION_GRANTED) {
                             return;
                         }
-                        Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
-                        LatLng zoom2 = new LatLng(location.getLatitude(), location.getLongitude());
-                        if (latitude == null && longitude == null) {
+                        if (latitude == null && longitude == null && nome == null) {
                             marker.remove();
                         } else {
                             marker = mMap.addMarker(new MarkerOptions()
@@ -152,9 +172,15 @@ public class SearchableActivity extends AppCompatActivity implements OnMapReadyC
                                     .title(nome)
                                     .snippet(profissao));
                         }
+                        Criteria criteria = new Criteria();
+                        Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
+                        if (location != null) {
+                            LatLng zoom2 = new LatLng(location.getLatitude(), location.getLongitude());
+                        } else {
+                            LatLng zom3 = new LatLng(latCurrent, longCurrent);
+
+                        }
                     }
-                } else {
-                    Log.i("Eu passei aqui!", "Deu erro");
                 }
             }
 
@@ -165,18 +191,31 @@ public class SearchableActivity extends AppCompatActivity implements OnMapReadyC
         });
     }
 
-    private void handleSearch(Intent intent) {
-        if (Intent.ACTION_SEARCH.equalsIgnoreCase(intent.getAction())) {
-            String q = intent.getStringExtra(SearchManager.QUERY);
-            filterLocation(q);
-            customAddMarker();
-        }
-    }
-
     public void handleSearch2 (Intent intent) {
         if (Intent.ACTION_SEARCH.equalsIgnoreCase(intent.getAction())) {
             String q = intent.getStringExtra(SearchManager.QUERY);
-            filterOcupacion(q);
+            switch (q.toLowerCase()){
+                case "topografo":
+                    filterOcupacion(q);
+                    break;
+                case "auxiliar":
+                    filterOcupacion(q);
+                    break;
+                case "nivelador":
+                    filterOcupacion(q);
+                    break;
+                case "piloto de drone":
+                    filterOcupacion(q);
+                    break;
+                case "desenhista":
+                    filterOcupacion(q);
+                    break;
+                case "projetista":
+                    filterOcupacion(q);
+                 default:
+                     filterLocation(q);
+                     customAddMarker();
+            }
         }
     }
 
@@ -193,7 +232,7 @@ public class SearchableActivity extends AppCompatActivity implements OnMapReadyC
         }
 
         LatLng zoomFilter = new LatLng(endLat, endLong);
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(zoomFilter, 12));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(zoomFilter, 10));
     }
 
     public void filterOcupacion(String q) {
@@ -227,5 +266,46 @@ public class SearchableActivity extends AppCompatActivity implements OnMapReadyC
 
             }
         });
+    }
+
+    protected void startLocationUpdates() {
+
+        // Create the location request to start receiving updates
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setInterval(UPDATE_INTERVAL);
+        mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
+
+        // Create LocationSettingsRequest object using location request
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
+        builder.addLocationRequest(mLocationRequest);
+        LocationSettingsRequest locationSettingsRequest = builder.build();
+
+        // Check whether location settings are satisfied
+        // https://developers.google.com/android/reference/com/google/android/gms/location/SettingsClient
+        SettingsClient settingsClient = LocationServices.getSettingsClient(this);
+        settingsClient.checkLocationSettings(locationSettingsRequest);
+
+        // new Google API SDK v11 uses getFusedLocationProviderClient(this)
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        getFusedLocationProviderClient(this).requestLocationUpdates(mLocationRequest, new LocationCallback() {
+                    @Override
+                    public void onLocationResult(LocationResult locationResult) {
+                        // do work here
+                        onLocationChanged(locationResult.getLastLocation());
+                    }
+                },
+                Looper.myLooper());
+    }
+
+    public void onLocationChanged(Location location) {
+        // New location has now been determined
+        latCurrent =location.getLatitude();
+        longCurrent = location.getLongitude();
+
     }
 }

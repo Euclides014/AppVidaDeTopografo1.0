@@ -69,6 +69,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Email:"
+                    android:inputType="textEmailAddress"
                     app:bootstrapBrand="info"
                     app:bootstrapSize="md"
                     app:roundedCorners="true" />
@@ -89,6 +90,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="CPF:"
+                    android:inputType="number"
                     android:textSize="12sp"
                     app:bootstrapBrand="info"
                     app:bootstrapSize="md"
@@ -108,6 +110,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Data de Nascimento:"
+                    android:inputType="date"
                     app:bootstrapBrand="info"
                     app:bootstrapSize="md"
                     app:roundedCorners="true" />
@@ -129,6 +132,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Telefone:"
+                    android:inputType="phone"
                     app:bootstrapBrand="info"
                     app:bootstrapSize="md"
                     app:roundedCorners="true" />
@@ -166,6 +170,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="CEP:"
+                    android:inputType="number"
                     app:bootstrapBrand="info"
                     app:bootstrapSize="md"
                     app:roundedCorners="true" />
@@ -207,6 +212,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="N°:"
+                    android:inputType="number"
                     app:bootstrapBrand="info"
                     app:bootstrapSize="md"
                     app:roundedCorners="true" />

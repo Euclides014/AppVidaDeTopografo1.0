@@ -3,19 +3,28 @@ package com.example.applicationvidadetopografo.Providers;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Looper;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
+import com.example.applicationvidadetopografo.Activity.PerfilUsersActivity;
 import com.example.applicationvidadetopografo.Classes.Usuario;
 import com.example.applicationvidadetopografo.DAO.ConfiguracaoFirebase;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -33,6 +42,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import static com.google.android.gms.location.LocationServices.getFusedLocationProviderClient;
+
 public class MapaFragment extends SupportMapFragment implements OnMapReadyCallback,
         GoogleMap.OnMapClickListener, LocationListener {
 
@@ -43,9 +54,18 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
     private String nome;
     private String latitude;
     private String longitude;
+    private String keyUser;
+    private Double latCurrent;
+    private Double longCurrent;
     private String profissaoAux;
     private String profissao;
+    private LocationManager mLocationManager;
     private ArrayList<String> ocupacao = new ArrayList<>();
+    private static final long UPDATE_INTERVAL = 10000;
+    private static final long FASTEST_INTERVAL = 5000;
+    private LocationRequest mLocationRequest;
+
+    public static final  int CONST_TELA_PERFIL = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -85,12 +105,14 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
                 return;
             }
             mMap.setMyLocationEnabled(true);
+            startLocationUpdates();
 
         } catch (Exception exep) {
 
         }
         mMap = googleMap;
         customAddMarker();
+
 
         //Eventos
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
@@ -103,7 +125,29 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
+                reference = ConfiguracaoFirebase.getFirebase();
+                reference.child("usuarios").orderByChild("nome").equalTo(marker.getTitle())
+                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                            keyUser = snapshot.child("keyUsuario").getValue().toString();
 
+                        }
+                        Bundle params = new Bundle();
+                        params .putString("keyUser", keyUser);
+
+                        Intent intent = new Intent(getActivity(), PerfilUsersActivity.class);
+                        intent.putExtras(params);
+
+                        startActivityForResult(intent, CONST_TELA_PERFIL);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
             }
         });
 
@@ -111,11 +155,6 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
 
     @Override
     public void onMapClick(LatLng latLng) {
-
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
 
     }
 
@@ -146,36 +185,81 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
                         longitude = s.child("longitude").getValue().toString();
                         ocupacao = (ArrayList<String>) s.child("ocupacao").getValue();
                         profissaoAux = ocupacao.toString();
-                        profissaoAux = profissaoAux.replace("[","");
-                        profissao = profissaoAux.replace("]","");
+                        profissaoAux = profissaoAux.replace("[", "");
+                        profissao = profissaoAux.replace("]", "");
                         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-                        Criteria criteria = new Criteria();
                         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
                                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
                                 != PackageManager.PERMISSION_GRANTED) {
                             return;
                         }
-                        Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
-                        LatLng zoom2 = new LatLng(location.getLatitude(), location.getLongitude());
-                        if(latitude == null && longitude == null ){
+                        if (latitude == null && longitude == null && nome == null) {
                             marker.remove();
                         } else {
                             marker = mMap.addMarker(new MarkerOptions()
                                     .position(new LatLng(Double.valueOf(latitude), Double.valueOf(longitude)))
                                     .title(nome)
                                     .snippet(profissao));
-
+                        }
+                        Criteria criteria = new Criteria();
+                        Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
+                        if (location != null) {
+                            LatLng zoom2 = new LatLng(location.getLatitude(), location.getLongitude());
                             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(zoom2, 10));
+                        } else {
+                            LatLng zom3 = new LatLng(latCurrent, longCurrent);
+                            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(zom3,10));
+
                         }
                     }
-                }else {
-                    Log.i("Eu passei aqui!", "Deu erro" );
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
+    }
+
+    protected void startLocationUpdates() {
+
+        // Create the location request to start receiving updates
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setInterval(UPDATE_INTERVAL);
+        mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
+
+        // Create LocationSettingsRequest object using location request
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
+        builder.addLocationRequest(mLocationRequest);
+        LocationSettingsRequest locationSettingsRequest = builder.build();
+
+        // Check whether location settings are satisfied
+        // https://developers.google.com/android/reference/com/google/android/gms/location/SettingsClient
+        SettingsClient settingsClient = LocationServices.getSettingsClient(getActivity());
+        settingsClient.checkLocationSettings(locationSettingsRequest);
+
+        // new Google API SDK v11 uses getFusedLocationProviderClient(this)
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        getFusedLocationProviderClient(getActivity()).requestLocationUpdates(mLocationRequest, new LocationCallback() {
+                    @Override
+                    public void onLocationResult(LocationResult locationResult) {
+                        // do work here
+                        onLocationChanged(locationResult.getLastLocation());
+                    }
+                },
+                Looper.myLooper());
+    }
+
+    public void onLocationChanged(Location location) {
+        // New location has now been determined
+        latCurrent =location.getLatitude();
+        longCurrent = location.getLongitude();
+
     }
 }
