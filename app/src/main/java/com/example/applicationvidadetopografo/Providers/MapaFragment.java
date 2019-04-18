@@ -59,7 +59,6 @@ public class MapaFragment extends SupportMapFragment implements OnMapReadyCallba
     private Double longCurrent;
     private String profissaoAux;
     private String profissao;
-    private LocationManager mLocationManager;
     private ArrayList<String> ocupacao = new ArrayList<>();
     private static final long UPDATE_INTERVAL = 10000;
     private static final long FASTEST_INTERVAL = 5000;

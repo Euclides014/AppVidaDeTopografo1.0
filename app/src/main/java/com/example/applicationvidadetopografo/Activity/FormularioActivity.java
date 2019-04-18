@@ -3,6 +3,7 @@ package com.example.applicationvidadetopografo.Activity;
 import android.Manifest;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -18,8 +19,11 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -46,11 +50,17 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.SettingsClient;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
@@ -61,6 +71,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 import static com.google.android.gms.location.LocationServices.getFusedLocationProviderClient;
 
@@ -71,7 +82,6 @@ public class FormularioActivity extends AppCompatActivity {
     private BootstrapEditText dataNascimento;
     private BootstrapEditText email;
     private BootstrapEditText telefone;
-    private BootstrapEditText experiencia;
     private BootstrapEditText cep;
     private BootstrapEditText rua;
     private BootstrapEditText numero;
@@ -81,24 +91,23 @@ public class FormularioActivity extends AppCompatActivity {
     private BootstrapEditText edtCadExpSoft;
     private BootstrapEditText edtCadInfor;
     private Spinner selectEscolaridade;
-    private ArrayList<String> listaOcupacao = new ArrayList();
+    private ArrayList<String> listaOcupacao = new ArrayList<>();
     private ArrayList<String> listaEquipamento = new ArrayList<>();
     private ArrayList<String> listaMobilidade = new ArrayList<>();
     private ArrayList<String> listaExpEquip = new ArrayList<>();
     private ArrayList<String> listaExpSoft = new ArrayList<>();
     private ArrayList<String> listadeContratacao = new ArrayList<>();
 
-
     private RadioButton rbDisp, rbNDisp, locToGPS, locTOAddress;
 
     private CheckBox checkTopo, checkAux, checkNivl, checkDesen, checkPilot, checkMoto, checkCarro, checkCarroOFFRoad, checkReceptor, checkReceptorGeodesico;
-    private CheckBox checkNivel, checkEstacao, checkDrone, checkBoxLocalizacao, checkTeodolito;
+    private CheckBox checkNivel, checkEstacao, checkDrone, checkTeodolito;
     private CheckBox checkExpRGN, checkExpET, checkExpRGG, checkExpVantDrone, checkExpNT, checkExpTeo;
     private CheckBox checkExpSoftAC, checkExpSoftACC3D, checkExpSoftTEVN, checkExpSoftP4D, checkExpSoftBTG, checkExpSoftRe, checkExpSoftAG;
     private CheckBox checkExpSoftTBC, checkExpSoftQG, checkExpSoftTT, checkExpSoftPS, checkExpSoftGM;
     private CheckBox checkCLT, checkPJ, checkFreelancer;
 
-    private BootstrapButton btnConclui, btnCancel, btEnviaCurriculo;
+    private BootstrapButton btnConclui, btnCancel;
 
     private static final long UPDATE_INTERVAL = 10000;
     private static final long FASTEST_INTERVAL = 5000;
@@ -106,8 +115,8 @@ public class FormularioActivity extends AppCompatActivity {
     private LocationRequest mLocationRequest;
 
     private Double latitude;
-    private ImageView imageView, btnCalendar;
-    private TextView exibirData;
+    private ImageView imageView, btnCalendar, selectDoc;
+    private TextView exibirData, txt_name_arq;
     private String emailUsuarioLogado;
     private int tempoDeExp;
     private FirebaseAuth autenticacao;
@@ -118,8 +127,8 @@ public class FormularioActivity extends AppCompatActivity {
     private Endereco endereco;
     private String endereçoToLoc;
     private Util util;
+    Uri pdfURI;
     private Double endLat, endLong;
-
 
 
     @Override
@@ -128,21 +137,12 @@ public class FormularioActivity extends AppCompatActivity {
         setContentView(R.layout.activity_formulario);
 
         startLocationUpdates();
-
-        Spinner spEscolaridade = (Spinner) findViewById(R.id.selecEscolaridade);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter
-                .createFromResource(this, R.array.bootstrap_dropdown_example_data,
-                        android.R.layout.simple_spinner_item);
-        spEscolaridade.setAdapter(adapter);
+        carregaImagemPadrao();
         recuperarvalores();
 
         storageReference = ConfiguracaoFirebase.getFirebaseStorageReference();
         autenticacao = ConfiguracaoFirebase.getFirebaseAuth();
         emailUsuarioLogado = autenticacao.getCurrentUser().getEmail();
-        imageView = (ImageView) findViewById(R.id.imagePerfil);
-        btnCalendar = (ImageView) findViewById(R.id.btnCalendar);
-        exibirData = (TextView) findViewById(R.id.showDateSelect);
-        carregaImagemPadrao();
 
         btnCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,7 +155,19 @@ public class FormularioActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-                startActivityForResult(Intent.createChooser(intent,"Selecione uma imagem" ), 123);
+                startActivityForResult(Intent.createChooser(intent, "Selecione uma imagem"), 123);
+            }
+        });
+
+        selectDoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
+                        == PackageManager.PERMISSION_GRANTED) {
+                    uploadCurriculo();
+                } else {
+                    ActivityCompat.requestPermissions(FormularioActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 9);
+                }
             }
         });
 
@@ -167,34 +179,19 @@ public class FormularioActivity extends AppCompatActivity {
                 R.id.edtCadtEstado);
 
         btnConclui = (BootstrapButton) findViewById(R.id.btnConclui);
-        btEnviaCurriculo =(BootstrapButton) findViewById(R.id.btnEnviarCurriculo);
         btnCancel = (BootstrapButton) findViewById(R.id.btnCancel);
 
         btnConclui.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if (pdfURI != null) {
+                    uploadfile(pdfURI);
+                }
                 preencheDadosUsuario();
                 cadastrarFotoUsuario();
-                cadastrarUsuario(usuario);
-                Intent intent = new Intent(FormularioActivity.this, TelaMapaActivity.class);
-                startActivity(intent);
-                finish();
-
+                validateFields();
             }
         });
-        btEnviaCurriculo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                preencheDadosUsuario();
-                cadastrarFotoUsuario();
-                cadastrarUsuario(usuario);
-                Intent intent = new Intent(FormularioActivity.this, UploadCurriculo.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -215,24 +212,24 @@ public class FormularioActivity extends AppCompatActivity {
         DatePickerDialog datePickerDialog = new DatePickerDialog(FormularioActivity.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                exibirData.setText(dayOfMonth+"/"+(month+1)+"/"+year);
+                exibirData.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
                 calcularTempoExperiencia(dayOfMonth, month, year);
             }
-        }, ano,mes,dia);
+        }, ano, mes, dia);
         datePickerDialog.show();
     }
 
-    private void calcularTempoExperiencia(int diaIni, int mesIni, int anoIni){
+    private void calcularTempoExperiencia(int diaIni, int mesIni, int anoIni) {
         Calendar calendar = Calendar.getInstance();
         int diaA = calendar.get(Calendar.DAY_OF_MONTH);
         int mesA = calendar.get(Calendar.MONTH);
         int anoA = calendar.get(Calendar.YEAR);
 
         int tempoDeExperiencia = anoA - anoIni;
-        if (mesIni > mesA){
+        if (mesIni > mesA) {
             tempoDeExperiencia--;
-        } else if (mesA == mesIni){
-            if(diaIni > diaA){
+        } else if (mesA == mesIni) {
+            if (diaIni > diaA) {
                 tempoDeExperiencia--;
             }
         }
@@ -240,6 +237,12 @@ public class FormularioActivity extends AppCompatActivity {
     }
 
     private void recuperarvalores() {
+
+        imageView = (ImageView) findViewById(R.id.imagePerfil);
+        txt_name_arq = findViewById(R.id.txt_name_arq);
+        btnCalendar = (ImageView) findViewById(R.id.btnCalendar);
+        selectDoc = findViewById(R.id.img_select_arq);
+        exibirData = (TextView) findViewById(R.id.showDateSelect);
 
         nome = (BootstrapEditText) findViewById(R.id.edtCadtNome);
         cpf = (BootstrapEditText) findViewById(R.id.edtCadtCPF);
@@ -254,7 +257,11 @@ public class FormularioActivity extends AppCompatActivity {
         estado = (BootstrapEditText) findViewById(R.id.edtCadtEstado);
         edtCadInfor = findViewById(R.id.edtCadInfor);
         edtCadExpSoft = (BootstrapEditText) findViewById(R.id.edtCadExpSoft);
-        selectEscolaridade = (Spinner) findViewById(R.id.selecEscolaridade);
+        selectEscolaridade = findViewById(R.id.selecEscolaridade);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter
+                .createFromResource(this, R.array.bootstrap_dropdown_example_data,
+                        android.R.layout.simple_spinner_dropdown_item);
+        selectEscolaridade.setAdapter(adapter);
 
         //valores das Checkbox ocupacao
 
@@ -324,8 +331,8 @@ public class FormularioActivity extends AppCompatActivity {
         usuario.setTelefone(telefone.getText().toString());
         usuario.setCpf(cpf.getText().toString());
         usuario.setDataNascimento(dataNascimento.getText().toString());
-        usuario.setTempodeexperiencia(String.valueOf(tempoDeExp+"anos"));
-        if (edtCadInfor.getText() == null){
+        usuario.setTempodeexperiencia((tempoDeExp + "anos"));
+        if (edtCadInfor.getText() == null) {
             edtCadInfor.setText("");
         }
         usuario.setInforAdicionais(edtCadInfor.getText().toString());
@@ -335,11 +342,10 @@ public class FormularioActivity extends AppCompatActivity {
         usuario.setCidade(cidade.getText().toString());
         usuario.setEstado(estado.getText().toString());
         usuario.setTipoUsuario("Comum");
-
         selectEscolaridade.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                usuario.setFormacao((String) selectEscolaridade.getSelectedItem());
+                usuario.setFormacao(parent.getOnItemClickListener().toString());
             }
 
             @Override
@@ -348,20 +354,19 @@ public class FormularioActivity extends AppCompatActivity {
             }
         });
 
-
         if (rbDisp.isChecked()) {
             usuario.setDispViagem("Disponível para viagem");
         } else if (rbNDisp.isChecked()) {
             usuario.setDispViagem("Não disponível para viagens");
         }
 
-        if (checkFreelancer.isChecked()){
+        if (checkFreelancer.isChecked()) {
             listadeContratacao.add("Frelancer");
         }
-        if (checkCLT.isChecked()){
+        if (checkCLT.isChecked()) {
             listadeContratacao.add("CLT");
         }
-        if (checkPJ.isChecked()){
+        if (checkPJ.isChecked()) {
             listadeContratacao.add("PJ");
         }
         usuario.setTipodecontrato(listadeContratacao);
@@ -369,7 +374,7 @@ public class FormularioActivity extends AppCompatActivity {
         if (locToGPS.isChecked()) {
             usuario.setLatitude(String.valueOf(latitude));
             usuario.setLongitude(String.valueOf(longitude));
-        }else if(locTOAddress.isChecked()){
+        } else if (locTOAddress.isChecked()) {
             toLocation();
             usuario.setLatitude(String.valueOf(endLat));
             usuario.setLongitude(String.valueOf(endLong));
@@ -500,7 +505,7 @@ public class FormularioActivity extends AppCompatActivity {
         }
     }
 
-    private void carregaImagemPadrao(){
+    private void carregaImagemPadrao() {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         final StorageReference storageReference = storage.getReferenceFromUrl("gs://applicationvidadetopografo.appspot.com/iconUser.png");
 
@@ -528,7 +533,7 @@ public class FormularioActivity extends AppCompatActivity {
         Bitmap bitmap = imageView.getDrawingCache();
         ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArray);
-        byte [] data = byteArray.toByteArray();
+        byte[] data = byteArray.toByteArray();
 
         UploadTask uploadTask = montaImagem.putBytes(data);
         uploadTask.addOnFailureListener(new OnFailureListener() {
@@ -540,6 +545,7 @@ public class FormularioActivity extends AppCompatActivity {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Uri dowloadUrl = taskSnapshot.getUploadSessionUri();
+                usuario.setUrlPerfil(dowloadUrl.toString());
                 carregaImagemPadrao();
             }
         });
@@ -557,6 +563,12 @@ public class FormularioActivity extends AppCompatActivity {
                 Picasso.get().load(imagemSelecionada.toString()).resize(width, height).centerCrop().into(imageView);
 
             }
+        }
+        if (requestCode == 86 && resultCode == RESULT_OK && data != null) {
+            pdfURI = data.getData();
+            txt_name_arq.setText(data.getData().getLastPathSegment());
+        } else {
+            Toast.makeText(FormularioActivity.this, "Selecione o arquivo", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -596,20 +608,20 @@ public class FormularioActivity extends AppCompatActivity {
 
     public void onLocationChanged(Location location) {
         // New location has now been determined
-                latitude =location.getLatitude();
-                longitude = location.getLongitude();
+        latitude = location.getLatitude();
+        longitude = location.getLongitude();
 
     }
 
-    public void lockFields (boolean isToLock){
-        util.lockFields( isToLock );
+    public void lockFields(boolean isToLock) {
+        util.lockFields(isToLock);
     }
 
-    public String getUriCEP(){
-        return "https://viacep.com.br/ws/"+cep.getText()+"/json/";
+    public String getUriCEP() {
+        return "https://viacep.com.br/ws/" + cep.getText() + "/json/";
     }
 
-    public void setDataViews( Endereco endereco){
+    public void setDataViews(Endereco endereco) {
         setField(R.id.edtCadtEndereco, endereco.getEndereco());
         setField(R.id.edtCadtBairro, endereco.getBairro());
         setField(R.id.edtCadtCidade, endereco.getCidade());
@@ -617,15 +629,15 @@ public class FormularioActivity extends AppCompatActivity {
 
     }
 
-    private void setField (int id, String data){
-        ((BootstrapEditText) findViewById(id)).setText( data );
+    private void setField(int id, String data) {
+        ((BootstrapEditText) findViewById(id)).setText(data);
     }
 
-    private void toLocation(){
+    private void toLocation() {
         endereçoToLoc = (cep.getText().toString());
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
         try {
-            List<Address> addresses = geocoder.getFromLocationName(endereçoToLoc,1);
+            List<Address> addresses = geocoder.getFromLocationName(endereçoToLoc, 1);
             Address address = addresses.get(0);
             endLat = address.getLatitude();
             endLong = address.getLongitude();
@@ -634,4 +646,105 @@ public class FormularioActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+    private void uploadCurriculo() {
+        Intent intent = new Intent();
+        intent.setType("application/pdf");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, 86);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == 9 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            uploadCurriculo();
+        } else {
+            Toast.makeText(FormularioActivity.this, "É necessário permitir que o aplicativo acesse o armazenamento interno", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void uploadfile(Uri pdfURI) {
+        String fileName = System.currentTimeMillis() + "";
+        StorageReference uploadCurrículo = storageReference.child("curriculo_Usuario/" + fileName + emailUsuarioLogado);
+        uploadCurrículo.putFile(pdfURI).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                String url = taskSnapshot.getUploadSessionUri().toString();
+                usuario.setUrlCurriculo(url);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(FormularioActivity.this, "Falha ao envia o arquivo", Toast.LENGTH_LONG).show();
+            }
+        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                int currentProgress = (int) (100 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+
+            }
+        });
+    }
+
+    private void validateFields() {
+
+        boolean res = false;
+
+        String nameValidation = nome.getText().toString();
+        String emailValidation = email.getText().toString();
+        String cpfValidation = cpf.getText().toString();
+        String dateBornValidation = dataNascimento.getText().toString();
+        String numberPhone = telefone.getText().toString();
+        String cepValidation = cep.getText().toString();
+
+        boolean rbLocValidation = locTOAddress.isSelected() || locToGPS.isSelected();
+
+        boolean checkOcuValidation = checkTopo.isSelected();
+
+
+        if (res = isFieldsNull(nameValidation)) {
+            nome.requestFocus();
+        } else if (res = !isEmailValid(emailValidation)) {
+            email.requestFocus();
+        } else if (res = isFieldsNull(cpfValidation)) {
+            cpf.requestFocus();
+        } else if (res = isFieldsNull(dateBornValidation)) {
+            dataNascimento.requestFocus();
+        } else if (res = isFieldsNull(numberPhone)) {
+            telefone.requestFocus();
+        } else if (res = isFieldsNull(cepValidation)) {
+            cep.requestFocus();
+        } else if (rbLocValidation == false){
+            locTOAddress.requestFocus();
+        } else if (checkOcuValidation == false){
+            checkTopo.requestFocus();
+        }
+
+        if (res){
+            AlertDialog.Builder dlg = new AlertDialog.Builder(this);
+            dlg.setIcon(R.drawable.ic_warning_yellow_24dp);
+            dlg.setTitle("Atenção");
+            dlg.setMessage("Há campos inválidos ou em branco!");
+            dlg.setNeutralButton("OK", null);
+            dlg.show();
+        } else {
+            cadastrarUsuario(usuario);
+            Intent intent = new Intent(FormularioActivity.this, TelaMapaActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+    private boolean isFieldsNull(String value) {
+
+        boolean result = (TextUtils.isEmpty(value) || value.trim().isEmpty());
+        return result;
+    }
+
+    private boolean isEmailValid(String emailValid) {
+        boolean result = (!isFieldsNull(emailValid) && Patterns.EMAIL_ADDRESS.matcher(emailValid).matches());
+        return result;
+    }
+
+
 }

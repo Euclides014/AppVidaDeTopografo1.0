@@ -43,7 +43,6 @@
         </activity>
         <activity android:name=".Activity.PerfilUsuarioActivity" />
         <activity android:name=".Activity.GaleriaEbookActivity" />
-        <activity android:name=".Activity.UploadCurriculo" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

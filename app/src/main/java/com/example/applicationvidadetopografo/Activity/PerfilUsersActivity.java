@@ -21,7 +21,7 @@ public class PerfilUsersActivity extends AppCompatActivity {
     private String idUser;
     private DatabaseReference reference;
 
-    private TextView txtNomeUser, txtCpfUser, txtEmailUser, txtTelefUser, txtDataNascUser, txtEnderecoUser;
+    private TextView txtNomeUser, txtEmailUser, txtTelefUser, txtDataNascUser, txtEnderecoUser;
     private TextView txtBairroUser, txtCidadeUsuario, txtEstadoUser, txtEscolaridadeUser, txtOcupUser;
     private TextView txtExperienciaUser, txtExpEquipUser, txtDispViagemUser, txtExpSoftUser;
 
@@ -52,7 +52,6 @@ public class PerfilUsersActivity extends AppCompatActivity {
 
     private void recoversvalues(){
         txtNomeUser = findViewById(R.id.txtNomeUser);
-        txtCpfUser = findViewById(R.id.txtCpfUser);
         txtEmailUser = findViewById(R.id.txtEmailUser);
         txtTelefUser = findViewById(R.id.txtTelefUser);
         txtDataNascUser = findViewById(R.id.txtDataNascUser);
@@ -75,7 +74,6 @@ public class PerfilUsersActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                             txtNomeUser.setText(postSnapshot.child("nome").getValue().toString());
-                            txtCpfUser.setText(postSnapshot.child("cpf").getValue().toString());
                             txtEmailUser.setText(postSnapshot.child("email").getValue().toString());
                             txtTelefUser.setText(postSnapshot.child("telefone").getValue().toString());
                             txtDataNascUser.setText(postSnapshot.child("dataNascimento").getValue().toString());

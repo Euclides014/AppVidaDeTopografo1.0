@@ -5,7 +5,6 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:background="@drawable/fundo"
     android:scrollbarAlwaysDrawHorizontalTrack="true"
     tools:context=".Activity.MainActivity">
@@ -43,6 +42,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/colorPrimary"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
         <com.beardedhen.androidbootstrap.BootstrapEditText
@@ -63,6 +64,8 @@
         android:layout_marginStart="264dp"
         android:layout_marginTop="8dp"
         android:text="Login"
+        android:elevation="2dp"
+        android:background="@drawable/myrect"
         app:bootstrapSize="lg"
         app:buttonMode="regular"
         app:layout_constraintStart_toStartOf="parent"
@@ -113,27 +116,23 @@
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/login_googlebutton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_width="165dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/loginButtonFacebook"
-        android:layout_width="0dp"
-        android:layout_height="76dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="175dp"
+        android:layout_height="37dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:padding="5dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_googlebutton" />
+        app:layout_constraintTop_toTopOf="@+id/guideline7"/>
 
     <TextView
         android:id="@+id/textCadastrarUsuario"
@@ -158,6 +157,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/icon_tela_login" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="368dp" />
+
+    <TextView
+        android:id="@+id/txt_rec_pass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textColor="@color/bootstrap_brand_secondary_fill"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+        tools:text="Esqueceu sua senha?" />
 
 
 </android.support.constraint.ConstraintLayout>

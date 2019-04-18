@@ -56,6 +56,8 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
         reference = ConfiguracaoFirebase.getFirebase();
         emailUsarioLogado = autenticacao.getCurrentUser().getEmail();
 
+        carregaImagemPadrao();
+
         recuperarValores();
         consultaBanco();
 
@@ -131,7 +133,7 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
 
     private void carregaImagemPadrao() {
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        final StorageReference storageReference = storage.getReferenceFromUrl("gs://applicationvidadetopografo.appspot.com/iconUser.png");
+        final StorageReference storageReference = storage.getReferenceFromUrl("gs://applicationvidadetopografo.appspot.com/fotoPerfilUsuario/" + emailUsarioLogado + ".jpg");
 
         final int heigth = 130;
         final int width = 130;
