@@ -23,11 +23,16 @@
         android:roundIcon="@drawable/icon_app"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.PerfilUsersActivity"></activity>
+        <activity android:name=".Activity.ResetActivity"></activity>
+        <activity android:name=".Activity.PerfilUsersActivity" />
 
         <meta-data
             android:name="android.app.default_searchable"
             android:value=".Activity.SearchableActivity" />
+
+        <provider
+            android:name="com.example.applicationvidadetopografo.Providers.SearchableProvider"
+            android:authorities="com.example.applicationvidadetopografo.Providers.SearchableProvider" />
 
         <activity
             android:name=".Activity.SearchableActivity"

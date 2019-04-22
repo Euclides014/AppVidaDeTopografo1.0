@@ -1,10 +1,13 @@
 package com.example.applicationvidadetopografo.Activity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -102,8 +105,6 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
-                    insereUsuario(usuario);
-                }else{
                     String erroExcecao = "";
                     try{
                         throw task.getException();
@@ -119,6 +120,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                     }
                     Toast.makeText(CadastroUsuarioActivity.this, "Erro: " + erroExcecao, Toast.LENGTH_LONG).show();
                 }
+                validateFields();
             }
         });
     }
@@ -135,5 +137,44 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
             e.printStackTrace();
             return false;
         }
+    }
+
+    private void validateFields() {
+
+        boolean res = false;
+
+        String nameValidation = nome.getText().toString();
+        String emailValidation = email.getText().toString();
+        String numberPhone = telefone.getText().toString();
+
+        if (res = isFieldsNull(nameValidation)) {
+            nome.requestFocus();
+        } else if (res = !isEmailValid(emailValidation)) {
+            email.requestFocus();
+        } else if (res = isFieldsNull(numberPhone)) {
+            telefone.requestFocus();
+        }
+
+        if (res){
+            AlertDialog.Builder dlg = new AlertDialog.Builder(this);
+            dlg.setIcon(R.drawable.ic_warning_yellow_24dp);
+            dlg.setTitle("Atenção");
+            dlg.setMessage("Há campos inválidos ou em branco!");
+            dlg.setNeutralButton("OK", null);
+            dlg.show();
+        } else {
+            insereUsuario(usuario);
+        }
+    }
+
+    private boolean isFieldsNull(String value) {
+
+        boolean result = (TextUtils.isEmpty(value) || value.trim().isEmpty());
+        return result;
+    }
+
+    private boolean isEmailValid(String emailValid) {
+        boolean result = (!isFieldsNull(emailValid) && Patterns.EMAIL_ADDRESS.matcher(emailValid).matches());
+        return result;
     }
 }

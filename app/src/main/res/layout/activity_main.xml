@@ -171,11 +171,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:text="Esqueceu sua senha?"
         android:textColor="@color/bootstrap_brand_secondary_fill"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
-        tools:text="Esqueceu sua senha?" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
 
 
 </android.support.constraint.ConstraintLayout>

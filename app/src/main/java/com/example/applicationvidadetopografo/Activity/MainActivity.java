@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private LoginButton loginButtonFacebook;
 
     private CallbackManager mCallbackManager;
-    private TextView textCadastrarUsuario;
+    private TextView textCadastrarUsuario, txt_rec_pass;
     private Usuario usuario;
 
     @Override
@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         loginButtonFacebook = (LoginButton) findViewById(R.id.loginButtonFacebook);
         loginButtonFacebook.setReadPermissions("email", "public_profile");
         textCadastrarUsuario = (TextView) findViewById(R.id.textCadastrarUsuario);
+        txt_rec_pass = findViewById(R.id.txt_rec_pass);
         permissaodeLocalizacao();
         permissaodeExtArmazen();
         inicializarFirebaseCallback();
@@ -111,6 +112,15 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     }
                 }
             });
+
+            txt_rec_pass.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplicationContext(), ResetActivity.class);
+                    startActivity(intent);
+                }
+            });
+
         }
     }
 

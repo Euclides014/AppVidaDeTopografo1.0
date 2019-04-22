@@ -1,18 +1,25 @@
 package com.example.applicationvidadetopografo.Activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.applicationvidadetopografo.DAO.ConfiguracaoFirebase;
 import com.example.applicationvidadetopografo.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -25,7 +32,9 @@ public class PerfilUsersActivity extends AppCompatActivity {
     private TextView txtBairroUser, txtCidadeUsuario, txtEstadoUser, txtEscolaridadeUser, txtOcupUser;
     private TextView txtExperienciaUser, txtExpEquipUser, txtDispViagemUser, txtExpSoftUser;
 
-    private String strAux, strOcupacao, strEquip, strSoft;;
+    private ImageView imagemPerfilUser;
+
+    private String strAux, strOcupacao, strEquip, strSoft, mailVisit;
     private ArrayList<String> ocupacao = new ArrayList<>();
     private ArrayList<String> equipamentos = new ArrayList<>();
     private ArrayList<String> software = new ArrayList<>();
@@ -47,6 +56,7 @@ public class PerfilUsersActivity extends AppCompatActivity {
         reference = ConfiguracaoFirebase.getFirebase();
         recoversvalues();
         queryDatabase ();
+        carregaImagemPadrao();
 
     }
 
@@ -65,9 +75,12 @@ public class PerfilUsersActivity extends AppCompatActivity {
         txtExpEquipUser = findViewById(R.id.txtExpEquipUser);
         txtDispViagemUser = findViewById(R.id.txtDispViagemUser);
         txtExpSoftUser = findViewById(R.id.txtExpSoftUser);
+
+        imagemPerfilUser = findViewById(R.id.imagemPerfilUser);
     }
 
     private void queryDatabase (){
+        final String visitMail;
         reference.child("usuarios").orderByChild("keyUsuario").equalTo(idUser)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
@@ -75,6 +88,7 @@ public class PerfilUsersActivity extends AppCompatActivity {
                         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                             txtNomeUser.setText(postSnapshot.child("nome").getValue().toString());
                             txtEmailUser.setText(postSnapshot.child("email").getValue().toString());
+                            mailVisit = (postSnapshot.child("email").getValue().toString());
                             txtTelefUser.setText(postSnapshot.child("telefone").getValue().toString());
                             txtDataNascUser.setText(postSnapshot.child("dataNascimento").getValue().toString());
                             txtEnderecoUser.setText(postSnapshot.child("rua").getValue().toString()+","+ postSnapshot.child("numero").getValue().toString());
@@ -113,6 +127,27 @@ public class PerfilUsersActivity extends AppCompatActivity {
                         Toast.makeText(PerfilUsersActivity.this,"Erro de conexão com banco de dados", Toast.LENGTH_LONG).show();
                     }
                 });
+
+    }
+
+    private void carregaImagemPadrao() {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        final StorageReference storageReference = storage.getReferenceFromUrl("gs://applicationvidadetopografo.appspot.com/fotoPerfilUsuario/" + mailVisit + ".jpg");
+
+        final int heigth = 130;
+        final int width = 130;
+
+        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri.toString()).resize(width, heigth).centerCrop().into(imagemPerfilUser);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
 
     }
 }

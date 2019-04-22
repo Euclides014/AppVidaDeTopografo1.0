@@ -13,6 +13,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Looper;
+import android.provider.SearchRecentSuggestions;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
@@ -26,6 +27,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
 import com.example.applicationvidadetopografo.DAO.ConfiguracaoFirebase;
+import com.example.applicationvidadetopografo.Providers.SearchableProvider;
 import com.example.applicationvidadetopografo.R;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -33,6 +35,7 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.SettingsClient;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -63,7 +66,7 @@ public class SearchableActivity extends AppCompatActivity implements OnMapReadyC
     private String nome;
     private String latitude;
     private String longitude;
-    private String profissaoAux;
+    private String profissaoAux, keyUser;
     private String profissao;
     private ArrayList<String> ocupacao = new ArrayList<>();
     private ArrayList<String> ListAux = new ArrayList<>();
@@ -77,6 +80,7 @@ public class SearchableActivity extends AppCompatActivity implements OnMapReadyC
 
     private static final long UPDATE_INTERVAL = 10000;
     private static final long FASTEST_INTERVAL = 5000;
+    public static final  int CONST_TELA_PERFIL = 1;
     private LocationRequest mLocationRequest;
 
     @Override
@@ -116,7 +120,12 @@ public class SearchableActivity extends AppCompatActivity implements OnMapReadyC
 
         if (id == android.R.id.home) {
             finish();
-
+        } else if( id == R.id.action_delete){
+            SearchRecentSuggestions searchRecentSuggestions = new SearchRecentSuggestions(this,
+                    SearchableProvider.AUTHORITY,
+                    SearchableProvider.MODE);
+            searchRecentSuggestions.clearHistory();
+            Toast.makeText(this, "Historico removido com sucesso", Toast.LENGTH_LONG).show();
         }
         return true;
     }
@@ -132,6 +141,34 @@ public class SearchableActivity extends AppCompatActivity implements OnMapReadyC
             return;
         }
         mMap.setMyLocationEnabled(true);
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                reference = ConfiguracaoFirebase.getFirebase();
+                reference.child("usuarios").orderByChild("nome").equalTo(marker.getTitle())
+                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                                    keyUser = snapshot.child("keyUsuario").getValue().toString();
+
+                                }
+                                Bundle params = new Bundle();
+                                params .putString("keyUser", keyUser);
+
+                                Intent intent = new Intent(getApplicationContext(), PerfilUsersActivity.class);
+                                intent.putExtras(params);
+
+                                startActivityForResult(intent, CONST_TELA_PERFIL);
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+            }
+        });
         handleSearch2(getIntent());
 
     }
@@ -139,8 +176,9 @@ public class SearchableActivity extends AppCompatActivity implements OnMapReadyC
     @Override
     protected void onNewIntent(Intent intent) {
         setIntent(intent);
-        handleSearch2(intent);
         marker.remove();
+        handleSearch2(intent);
+
 
     }
 
@@ -197,24 +235,52 @@ public class SearchableActivity extends AppCompatActivity implements OnMapReadyC
             switch (q.toLowerCase()){
                 case "topografo":
                     filterOcupacion(q);
+                    SearchRecentSuggestions searchRecentSuggestions = new SearchRecentSuggestions(this,
+                            SearchableProvider.AUTHORITY,
+                            SearchableProvider.MODE);
+                    searchRecentSuggestions.saveRecentQuery(q, null);
                     break;
                 case "auxiliar":
                     filterOcupacion(q);
+                    SearchRecentSuggestions searchRecentSuggestions2 = new SearchRecentSuggestions(this,
+                            SearchableProvider.AUTHORITY,
+                            SearchableProvider.MODE);
+                    searchRecentSuggestions2.saveRecentQuery(q, null);
                     break;
                 case "nivelador":
                     filterOcupacion(q);
+                    SearchRecentSuggestions searchRecentSuggestions3 = new SearchRecentSuggestions(this,
+                            SearchableProvider.AUTHORITY,
+                            SearchableProvider.MODE);
+                    searchRecentSuggestions3.saveRecentQuery(q, null);
                     break;
                 case "piloto de drone":
                     filterOcupacion(q);
+                    SearchRecentSuggestions searchRecentSuggestions4 = new SearchRecentSuggestions(this,
+                            SearchableProvider.AUTHORITY,
+                            SearchableProvider.MODE);
+                    searchRecentSuggestions4.saveRecentQuery(q, null);
                     break;
                 case "desenhista":
                     filterOcupacion(q);
+                    SearchRecentSuggestions searchRecentSuggestions5 = new SearchRecentSuggestions(this,
+                            SearchableProvider.AUTHORITY,
+                            SearchableProvider.MODE);
+                    searchRecentSuggestions5.saveRecentQuery(q, null);
                     break;
                 case "projetista":
                     filterOcupacion(q);
+                    SearchRecentSuggestions searchRecentSuggestions6 = new SearchRecentSuggestions(this,
+                            SearchableProvider.AUTHORITY,
+                            SearchableProvider.MODE);
+                    searchRecentSuggestions6.saveRecentQuery(q, null);
                  default:
                      filterLocation(q);
                      customAddMarker();
+                     SearchRecentSuggestions searchRecentSuggestions7 = new SearchRecentSuggestions(this,
+                             SearchableProvider.AUTHORITY,
+                             SearchableProvider.MODE);
+                     searchRecentSuggestions7.saveRecentQuery(q, null);
             }
         }
     }
@@ -223,16 +289,37 @@ public class SearchableActivity extends AppCompatActivity implements OnMapReadyC
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
         try {
             List<Address> addresses = geocoder.getFromLocationName(q, 1);
-            Address address = addresses.get(0);
-            endLat = address.getLatitude();
-            endLong = address.getLongitude();
+            if (addresses != null){
+                Address address = addresses.get(0);
+                endLat = address.getLatitude();
+                endLong = address.getLongitude();
+            } else {
+                LatLng zoomFilter = new LatLng(latCurrent, longCurrent);
+                mMap.clear();
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(zoomFilter, 10));
+                Toast.makeText(this, "Sem resultados para pesquisa", Toast.LENGTH_LONG).show();
+            }
 
-        } catch (IOException e) {
+        }catch (IllegalArgumentException e) {
             e.printStackTrace();
-        }
+            LatLng zoomFilter = new LatLng(latCurrent, longCurrent);
+            mMap.clear();
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(zoomFilter, 10));
+            Toast.makeText(this, "Pesquisa inválida", Toast.LENGTH_LONG).show();
 
-        LatLng zoomFilter = new LatLng(endLat, endLong);
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(zoomFilter, 10));
+        }catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Sem resultados para pesquisa", Toast.LENGTH_LONG).show();
+        }
+        if (endLat == null && endLong == null ){
+            LatLng zoomFilter = new LatLng(latCurrent, longCurrent);
+            mMap.clear();
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(zoomFilter, 10));
+            Toast.makeText(this, "Sem resultados para pesquisa", Toast.LENGTH_LONG).show();
+        } else {
+            LatLng zoomFilter = new LatLng(endLat, endLong);
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(zoomFilter, 10));
+        }
     }
 
     public void filterOcupacion(String q) {
