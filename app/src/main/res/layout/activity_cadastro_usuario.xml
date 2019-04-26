@@ -86,8 +86,7 @@
     <com.beardedhen.androidbootstrap.BootstrapButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        app:bootstrapSize="lg"
+        app:bootstrapSize="md"
         app:buttonMode="regular"
         app:showOutline="false"
         app:roundedCorners="true"
@@ -98,7 +97,7 @@
     <com.beardedhen.androidbootstrap.BootstrapButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:bootstrapSize="lg"
+        app:bootstrapSize="md"
         app:buttonMode="regular"
         app:showOutline="false"
         app:roundedCorners="true"

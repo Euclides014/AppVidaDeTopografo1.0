@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="8dp"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView2" />
@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="8dp"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textView6"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView6" />
@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="8dp"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textView14"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView14" />
@@ -114,7 +114,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="8dp"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textView15"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView15" />
@@ -137,7 +137,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="8dp"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textView16"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView16" />
@@ -160,7 +160,7 @@
                 android:layout_height="23dp"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="8dp"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textView17"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView17" />
@@ -184,7 +184,7 @@
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="14dp"
                 android:layout_marginEnd="4dp"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toStartOf="@+id/textView19"
                 app:layout_constraintStart_toEndOf="@+id/textView18"
                 app:layout_constraintTop_toBottomOf="@+id/textView17" />
@@ -206,7 +206,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textView19"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -228,7 +228,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="8dp"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textView20"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -237,16 +237,16 @@
             <TextView
                 android:id="@+id/textView31"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="8dp"
-                android:background="@color/bootstrap_gray_dark"
+                android:background="@drawable/bar_div_form"
+                android:gravity="center"
                 android:text="Dados Profissionais"
                 android:textAlignment="center"
                 android:textColor="@color/bootstrap_brand_secondary_fill"
-                android:textSize="24sp"
-                android:textStyle="bold"
+                android:textSize="22sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtEstadoUser" />
@@ -269,7 +269,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="8dp"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textView24"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView24" />
@@ -292,7 +292,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView32" />
@@ -316,7 +316,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView22" />
@@ -340,7 +340,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="14dp"
                 android:layout_marginEnd="8dp"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView23" />
@@ -363,7 +363,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textView28"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView28" />
@@ -388,7 +388,7 @@
                 android:layout_marginTop="14dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="16dp"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

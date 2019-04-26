@@ -23,8 +23,12 @@
         android:roundIcon="@drawable/icon_app"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.ResetActivity"></activity>
-        <activity android:name=".Activity.PerfilUsersActivity" />
+
+        <activity android:name=".Activity.ResetActivity"
+                  android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity android:name=".Activity.PerfilUsersActivity"
+                  android:theme="@style/AppTheme.NoActionBar"/>
 
         <meta-data
             android:name="android.app.default_searchable"
@@ -47,7 +51,9 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity android:name=".Activity.PerfilUsuarioActivity" />
-        <activity android:name=".Activity.GaleriaEbookActivity" />
+
+        <activity android:name=".Activity.GaleriaEbookActivity"
+                  android:theme="@style/AppTheme.NoActionBar"/>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -81,7 +87,8 @@
             android:windowSoftInputMode="adjustPan|adjustNothing" />
         <activity
             android:name=".Activity.FormularioActivity"
-            android:windowSoftInputMode="adjustPan|adjustNothing" />
+            android:windowSoftInputMode="adjustPan|adjustNothing"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -90,9 +97,11 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".Activity.CadastroUsuarioActivity" />
+        <activity android:name=".Activity.CadastroUsuarioActivity"
+                  android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".Activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan|adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

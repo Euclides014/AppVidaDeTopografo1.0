@@ -86,11 +86,11 @@ public class SearchableActivity extends AppCompatActivity implements OnMapReadyC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        startLocationUpdates();
         setContentView(R.layout.activity_searchable);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        startLocationUpdates();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -294,22 +294,19 @@ public class SearchableActivity extends AppCompatActivity implements OnMapReadyC
                 endLat = address.getLatitude();
                 endLong = address.getLongitude();
             } else {
-                LatLng zoomFilter = new LatLng(latCurrent, longCurrent);
-                mMap.clear();
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(zoomFilter, 10));
                 Toast.makeText(this, "Sem resultados para pesquisa", Toast.LENGTH_LONG).show();
             }
 
         }catch (IllegalArgumentException e) {
             e.printStackTrace();
-            LatLng zoomFilter = new LatLng(latCurrent, longCurrent);
-            mMap.clear();
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(zoomFilter, 10));
             Toast.makeText(this, "Pesquisa inválida", Toast.LENGTH_LONG).show();
 
         }catch (IOException e) {
             e.printStackTrace();
             Toast.makeText(this, "Sem resultados para pesquisa", Toast.LENGTH_LONG).show();
+        } catch (IndexOutOfBoundsException e){
+            e.printStackTrace();
+            Toast.makeText(this, "Pesquisa inválida", Toast.LENGTH_LONG).show();
         }
         if (endLat == null && endLong == null ){
             LatLng zoomFilter = new LatLng(latCurrent, longCurrent);

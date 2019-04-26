@@ -61,14 +61,16 @@
         android:id="@+id/btnLoginMail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="264dp"
-        android:layout_marginTop="8dp"
-        android:text="Login"
-        android:elevation="2dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/myrect"
-        app:bootstrapSize="lg"
+        android:elevation="2dp"
+        android:text="Login"
+        app:bootstrapSize="md"
         app:buttonMode="regular"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txt_rec_pass"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
         app:roundedCorners="true"
         app:showOutline="false" />
@@ -90,9 +92,7 @@
         android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="76dp"
-        android:layout_marginEnd="6dp"
+        android:layout_marginTop="80dp"
         android:text="OU"
         android:textAlignment="center"
         android:textColor="@color/bootstrap_brand_secondary_fill"
@@ -105,7 +105,7 @@
         android:id="@+id/view4"
         android:layout_width="120dp"
         android:layout_height="4dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="42dp"
         android:layout_marginEnd="16dp"
         android:background="@color/bootstrap_brand_secondary_fill"
@@ -116,29 +116,33 @@
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/login_googlebutton"
-        android:layout_width="165dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/loginButtonFacebook"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toTopOf="@+id/guideline7" />
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/loginButtonFacebook"
-        android:layout_width="175dp"
-        android:layout_height="37dp"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
         android:layout_gravity="center"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
         android:padding="5dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline7"/>
+        app:layout_constraintStart_toEndOf="@+id/login_googlebutton"
+        app:layout_constraintTop_toTopOf="@+id/guideline7" />
 
     <TextView
         android:id="@+id/textCadastrarUsuario"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="Clique aqui para realizar seu cadastro"
         android:textColor="@color/bootstrap_brand_secondary_fill"
         android:textSize="14sp"
@@ -163,7 +167,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="368dp" />
+        app:layout_constraintGuide_percent="0.62" />
 
     <TextView
         android:id="@+id/txt_rec_pass"

@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +44,8 @@ public class PerfilUsersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_users);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         Intent intent = getIntent();
         if (intent != null){
@@ -56,7 +59,6 @@ public class PerfilUsersActivity extends AppCompatActivity {
         reference = ConfiguracaoFirebase.getFirebase();
         recoversvalues();
         queryDatabase ();
-        carregaImagemPadrao();
 
     }
 
@@ -80,7 +82,6 @@ public class PerfilUsersActivity extends AppCompatActivity {
     }
 
     private void queryDatabase (){
-        final String visitMail;
         reference.child("usuarios").orderByChild("keyUsuario").equalTo(idUser)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
@@ -119,6 +120,23 @@ public class PerfilUsersActivity extends AppCompatActivity {
                             strAux = strAux.replace("]","");
                             strSoft = strAux;
                             txtExpSoftUser.setText(strSoft);
+
+                            final FirebaseStorage storage = FirebaseStorage.getInstance();
+                            final StorageReference storageReference = storage.getReferenceFromUrl("gs://applicationvidadetopografo.appspot.com/fotoPerfilUsuario/" + mailVisit + ".jpg");
+                            final int heigth = 130;
+                            final int width = 130;
+
+                            storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    Picasso.get().load(uri.toString()).resize(width, heigth).centerCrop().into(imagemPerfilUser);
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Picasso.get().load(R.drawable.icon_user).resize(width,heigth).centerCrop().into(imagemPerfilUser);
+                                }
+                            });
                         }
                     }
 
@@ -130,24 +148,37 @@ public class PerfilUsersActivity extends AppCompatActivity {
 
     }
 
-    private void carregaImagemPadrao() {
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        final StorageReference storageReference = storage.getReferenceFromUrl("gs://applicationvidadetopografo.appspot.com/fotoPerfilUsuario/" + mailVisit + ".jpg");
+    /*private void loadImageData() {
+        reference.child("usuarios").orderByChild("keyUsuario").equalTo(idUser)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                            mailVisit = postSnapshot.child("email").toString();
+                                FirebaseStorage storage = FirebaseStorage.getInstance();
+                                final StorageReference storageReference = storage.getReferenceFromUrl("gs://applicationvidadetopografo.appspot.com/fotoPerfilUsuario/" + mailVisit + ".jpg");
+                                final int heigth = 130;
+                                final int width = 130;
 
-        final int heigth = 130;
-        final int width = 130;
+                            storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                        Picasso.get().load(uri.toString()).resize(width, heigth).centerCrop().into(imagemPerfilUser);
+                                    }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
 
-        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Picasso.get().load(uri.toString()).resize(width, heigth).centerCrop().into(imagemPerfilUser);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
+                                }
+                            });
+                        }
+                    }
 
-            }
-        });
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-    }
+                    }
+                });
+
+    }*/
 }

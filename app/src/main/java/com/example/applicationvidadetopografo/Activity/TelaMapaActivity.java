@@ -62,6 +62,7 @@ public class TelaMapaActivity extends AppCompatActivity
         setContentView(R.layout.activity_tela_mapa);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getWindow().setBackgroundDrawable(null);
         conectarGoogleApi();
         inicializarFirebase();
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -152,13 +153,13 @@ public class TelaMapaActivity extends AppCompatActivity
          } else if (id == R.id.nav_ebooks){
              Intent intent = new Intent(TelaMapaActivity.this, GaleriaEbookActivity.class);
              startActivity(intent);
-
          } else if (id == R.id.nav_form){
              goToForm();
          } else if (id == R.id.nav_perfil){
              Intent intent = new Intent(TelaMapaActivity.this, PerfilUsuarioActivity.class);
              startActivity(intent);
-
+         } else if(id == R.id.nav_contact){
+             mailToIntent ();
          }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -238,6 +239,14 @@ public class TelaMapaActivity extends AppCompatActivity
 
     private void goToForm(){
         Intent intent = new Intent(TelaMapaActivity.this, FormularioActivity.class);
+        startActivity(intent);
+    }
+
+    private void mailToIntent (){
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Suporte ao aplicativo");
+        intent.setData(Uri.parse("mailto:gtalevantamentos@gmail.com"));
         startActivity(intent);
     }
 }

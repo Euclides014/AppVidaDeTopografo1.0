@@ -5,7 +5,8 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="12dp"
+    android:layout_margin="8dp"
+    android:background="@color/colorSecondary"
     android:scrollbarAlwaysDrawHorizontalTrack="true"
     tools:context=".Activity.FormularioActivity">
 
@@ -13,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="0dp">
 
         <android.support.constraint.ConstraintLayout
@@ -144,7 +145,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="13dp"
                 android:layout_marginEnd="8dp"
-                android:background="@color/bootstrap_gray"
+                android:background="@drawable/bar_div_form"
                 android:gravity="center"
                 android:text="LOCALIZAÇÃO"
                 android:textAlignment="center"
@@ -178,11 +179,11 @@
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/textInputLayout7"
-                android:layout_width="257dp"
+                android:layout_width="0dp"
                 android:layout_height="45dp"
                 android:layout_marginTop="2dp"
-                app:layout_constraintEnd_toStartOf="@+id/textInputLayout8"
-                app:layout_constraintHorizontal_bias="1.0"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout6">
 
@@ -202,7 +203,7 @@
                 android:layout_height="45dp"
                 android:layout_marginStart="6dp"
                 android:layout_marginTop="2dp"
-                android:layout_marginEnd="2dp"
+                android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textInputLayout7"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout6">
@@ -263,9 +264,9 @@
                 android:id="@+id/textInputLayout11"
                 android:layout_width="0dp"
                 android:layout_height="47dp"
-                android:layout_marginTop="2dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout10">
 
@@ -297,7 +298,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:background="@color/bootstrap_gray"
+                android:background="@drawable/bar_div_form"
                 android:gravity="center"
                 android:text="DADOS PROFISSIONAIS"
                 android:textAlignment="center"
@@ -313,22 +314,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="3dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
                 android:text="Ocupação:"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView5" />
+                app:layout_constraintTop_toBottomOf="@+id/view2" />
 
             <CheckBox
                 android:id="@+id/checkAux"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="1dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="4dp"
-                android:layout_marginEnd="20dp"
                 android:text="Auxiliar"
-                app:layout_constraintEnd_toStartOf="@+id/checkNivl"
-                app:layout_constraintStart_toEndOf="@+id/guideline4"
+                app:layout_constraintStart_toStartOf="@+id/guideline5"
                 app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
             <CheckBox
@@ -345,11 +344,11 @@
                 android:id="@+id/checkNivl"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginStart="8dp"
                 android:text="Nivelador"
-                app:layout_constraintStart_toEndOf="@+id/guideline"
-                app:layout_constraintTop_toBottomOf="@+id/textView7" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/checkDesen" />
 
             <CheckBox
                 android:id="@+id/checkDesen"
@@ -364,9 +363,9 @@
                 android:id="@+id/checkPilot"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="13dp"
+                android:layout_marginStart="8dp"
                 android:text="Piloto de Drone"
-                app:layout_constraintStart_toEndOf="@+id/checkDesen"
+                app:layout_constraintStart_toStartOf="@+id/guideline5"
                 app:layout_constraintTop_toBottomOf="@+id/checkAux" />
 
             <android.support.design.widget.TextInputLayout
@@ -400,10 +399,10 @@
                 android:id="@+id/checkCLT"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="1dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="6dp"
                 android:text="CLT"
-                app:layout_constraintStart_toEndOf="@+id/guideline4"
+                app:layout_constraintStart_toStartOf="@+id/guideline5"
                 app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
             <CheckBox
@@ -449,9 +448,12 @@
             <CheckBox
                 android:id="@+id/checkEstacao"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="6dp"
+                android:layout_marginEnd="8dp"
                 android:text="Estação Total"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/checkReceptor"
                 app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
@@ -467,6 +469,8 @@
                 android:id="@+id/checkDrone"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:text="VANT/Drone"
                 app:layout_constraintStart_toEndOf="@+id/checkReceptor"
                 app:layout_constraintTop_toBottomOf="@+id/checkEstacao" />
@@ -483,20 +487,19 @@
                 android:id="@+id/checkTeodolito"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:text="Teodolito"
                 app:layout_constraintStart_toEndOf="@+id/checkReceptorGeodesico"
                 app:layout_constraintTop_toBottomOf="@+id/checkDrone" />
 
             <CheckBox
                 android:id="@+id/checkBox4"
-                android:layout_width="75dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="1dp"
-                android:layout_marginTop="32dp"
                 android:text="LaiserSCAN"
-                app:layout_constraintStart_toEndOf="@+id/checkEstacao"
-                app:layout_constraintTop_toBottomOf="@+id/view6" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/checkNivel" />
 
             <TextView
                 android:id="@+id/textView10"
@@ -521,6 +524,7 @@
                 android:id="@+id/checkExpET"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="6dp"
                 android:text="Estação Total"
                 app:layout_constraintStart_toEndOf="@+id/checkExpRGN"
@@ -530,7 +534,7 @@
                 android:id="@+id/checkExpRGG"
                 android:layout_width="135dp"
                 android:layout_height="wrap_content"
-                android:text="Receptor GNSS Geo"
+                android:text="Receptor GNSS Geodésico"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/checkExpRGN" />
 
@@ -538,6 +542,8 @@
                 android:id="@+id/checkExpVantDrone"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:text="VANT/Drone"
                 app:layout_constraintStart_toEndOf="@+id/guideline5"
                 app:layout_constraintTop_toBottomOf="@+id/checkExpET" />
@@ -554,6 +560,7 @@
                 android:id="@+id/checkExpTeo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="6dp"
                 android:text="Teodolito"
                 app:layout_constraintStart_toEndOf="@+id/guideline5"
@@ -561,13 +568,13 @@
 
             <CheckBox
                 android:id="@+id/checkBox5"
-                android:layout_width="72dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="1dp"
-                android:layout_marginTop="6dp"
+                android:layout_marginEnd="8dp"
                 android:text="LaiserSCAN"
-                app:layout_constraintStart_toEndOf="@+id/checkExpET"
-                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/checkExpNT" />
 
             <TextView
                 android:id="@+id/textView11"
@@ -591,18 +598,20 @@
                 android:id="@+id/checkExpSoftACC3D"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:text="AutoCad Civil 3d"
-                app:layout_constraintStart_toEndOf="@+id/checkExpSoftAC"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                app:layout_constraintStart_toStartOf="@+id/guideline4"
                 app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
             <CheckBox
                 android:id="@+id/checkExpSoftTEVN"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
+                android:layout_marginTop="4dp"
                 android:text="TopoEVN"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView11" />
+                app:layout_constraintStart_toStartOf="@+id/guideline4"
+                app:layout_constraintTop_toBottomOf="@+id/checkExpSoftPS" />
 
             <CheckBox
                 android:id="@+id/checkExpSoftP4D"
@@ -616,19 +625,22 @@
                 android:id="@+id/checkExpSoftBTG"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="19dp"
+                android:layout_marginEnd="8dp"
                 android:text="TopoGRAPH"
-                app:layout_constraintStart_toEndOf="@+id/checkExpSoftP4D"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                app:layout_constraintStart_toStartOf="@+id/guideline4"
                 app:layout_constraintTop_toBottomOf="@+id/checkExpSoftACC3D" />
 
             <CheckBox
                 android:id="@+id/checkExpSoftRe"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="44dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="2dp"
                 android:text="Revit"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkExpSoftTEVN" />
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
             <CheckBox
                 android:id="@+id/checkExpSoftAG"
@@ -642,46 +654,49 @@
                 android:id="@+id/checkExpSoftTBC"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="13dp"
                 android:layout_marginTop="4dp"
                 android:text="Trimble"
-                app:layout_constraintStart_toEndOf="@+id/checkExpSoftAG"
+                app:layout_constraintStart_toStartOf="@+id/guideline4"
                 app:layout_constraintTop_toBottomOf="@+id/checkExpSoftBTG" />
 
             <CheckBox
                 android:id="@+id/checkExpSoftQG"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="48dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="8dp"
                 android:text="Qgis"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/checkExpSoftRe" />
 
             <CheckBox
                 android:id="@+id/checkExpSoftTT"
-                android:layout_width="80dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:text="TopconTools"
+                app:layout_constraintEnd_toStartOf="@+id/guideline5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/checkExpSoftAG" />
 
             <CheckBox
                 android:id="@+id/checkExpSoftPS"
-                android:layout_width="124dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
                 android:text="PhotoSCAN"
-                app:layout_constraintStart_toEndOf="@+id/checkExpSoftTT"
+                app:layout_constraintStart_toStartOf="@+id/guideline4"
                 app:layout_constraintTop_toBottomOf="@+id/checkExpSoftTBC" />
 
             <CheckBox
                 android:id="@+id/checkExpSoftGM"
-                android:layout_width="84dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
+                android:layout_marginEnd="8dp"
                 android:text="GlobalMapper"
-                app:layout_constraintStart_toEndOf="@+id/guideline"
-                app:layout_constraintTop_toBottomOf="@+id/checkExpSoftQG" />
+                app:layout_constraintEnd_toStartOf="@+id/guideline5"
+                app:layout_constraintStart_toStartOf="@+id/view7"
+                app:layout_constraintTop_toBottomOf="@+id/checkExpSoftTT" />
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/textInputLayout15"
@@ -691,7 +706,7 @@
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkExpSoftTT">
+                app:layout_constraintTop_toBottomOf="@+id/checkExpSoftGM">
 
                 <com.beardedhen.androidbootstrap.BootstrapEditText
                     android:id="@+id/edtCadExpSoft"
@@ -858,12 +873,11 @@
                 android:id="@+id/view5"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:background="@color/bootstrap_gray_dark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkDesen" />
+                app:layout_constraintTop_toBottomOf="@+id/checkNivl" />
 
             <View
                 android:id="@+id/view6"
@@ -887,7 +901,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="221dp" />
+                app:layout_constraintGuide_begin="198dp" />
 
             <android.support.constraint.Guideline
                 android:id="@+id/guideline3"
@@ -901,7 +915,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="126dp" />
+                app:layout_constraintGuide_end="209dp" />
 
             <android.support.constraint.Guideline
                 android:id="@+id/guideline5"
@@ -918,14 +932,7 @@
                 android:background="@color/bootstrap_gray_dark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkNivel" />
-
-            <android.support.constraint.Guideline
-                android:id="@+id/guideline6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_begin="1074dp" />
+                app:layout_constraintTop_toBottomOf="@+id/checkBox4" />
 
             <View
                 android:id="@+id/view8"
@@ -935,7 +942,7 @@
                 android:background="@color/bootstrap_gray_dark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkExpNT" />
+                app:layout_constraintTop_toBottomOf="@+id/checkBox5" />
 
             <View
                 android:id="@+id/view9"
@@ -969,9 +976,9 @@
 
             <RadioGroup
                 android:id="@+id/radioGroup"
-                android:layout_width="238dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView4"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout11">
 
@@ -1063,6 +1070,13 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/img_select_arq"
                 app:layout_constraintTop_toBottomOf="@+id/textView29" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="324dp" />
 
 
         </android.support.constraint.ConstraintLayout>
