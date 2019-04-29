@@ -1,13 +1,17 @@
 package com.example.applicationvidadetopografo.Activity;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.applicationvidadetopografo.Classes.Usuario;
 import com.example.applicationvidadetopografo.DAO.ConfiguracaoFirebase;
 import com.example.applicationvidadetopografo.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -45,6 +49,20 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
     private ArrayList<String> ocupacao = new ArrayList<>();
     private ArrayList<String> equipamentos = new ArrayList<>();
     private ArrayList<String> software = new ArrayList<>();
+
+    private String txtOrigem = "";
+    private String txtNome = "";
+    private String txtEmail = "";
+    private String txtCpf = "";
+    private String txtDateNasc = "";
+    private String txtTelefone = "";
+    private String txtCEP = "";
+    private String txtLogradouro = "";
+    private String txtNumberResi = "";
+    private String txtBairro = "";
+    private String txtCity = "";
+    private String txtEstado = "";
+    private String txtKeyUser;
 
 
     @Override
@@ -131,6 +149,21 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
                 });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_perfil, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.ic_edit_perfil){
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void carregaImagemPadrao() {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         final StorageReference storageReference = storage.getReferenceFromUrl("gs://applicationvidadetopografo.appspot.com/fotoPerfilUsuario/" + emailUsarioLogado + ".jpg");
@@ -150,5 +183,43 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void goToEditPerfil(){
+
+    }
+
+    private void editarPerfilUser(){
+        String emailUserLog = autenticacao.getCurrentUser().getEmail();
+        reference = ConfiguracaoFirebase.getFirebase();
+        reference.child("usuarios").orderByChild("email").equalTo(emailUserLog)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
+                            Usuario usuario = postSnapshot.getValue(Usuario.class);
+                            final Intent intent = new Intent(getApplicationContext(), EditPerfilActivity.class);
+                            final Bundle bundle = new Bundle();
+                            bundle.putString("origem", "editarUsuario");
+
+                            bundle.putString("origem", "editarUsuario");
+                            bundle.putString("origem", "editarUsuario");
+                            bundle.putString("origem", "editarUsuario");
+                            bundle.putString("origem", "editarUsuario");
+                            bundle.putString("origem", "editarUsuario");
+                            bundle.putString("origem", "editarUsuario");
+                            bundle.putString("origem", "editarUsuario");
+                            bundle.putString("origem", "editarUsuario");
+                            bundle.putString("origem", "editarUsuario");
+                            bundle.putString("origem", "editarUsuario");
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
     }
 }

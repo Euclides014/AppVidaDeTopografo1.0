@@ -587,7 +587,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/view8" />
 
             <CheckBox
-                android:id="@+id/checkExpSoftAC"
+                android:id="@+id/check_edit_Exp_SoftAC"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="AutoCad"
@@ -595,7 +595,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
             <CheckBox
-                android:id="@+id/checkExpSoftACC3D"
+                android:id="@+id/check_edit_Exp_SoftACC3D"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -605,34 +605,34 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
             <CheckBox
-                android:id="@+id/checkExpSoftTEVN"
+                android:id="@+id/check_edit_Exp_SoftTEVN"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="TopoEVN"
                 app:layout_constraintStart_toStartOf="@+id/guideline4"
-                app:layout_constraintTop_toBottomOf="@+id/checkExpSoftPS" />
+                app:layout_constraintTop_toBottomOf="@+id/check_edit_Exp_SoftPS" />
 
             <CheckBox
-                android:id="@+id/checkExpSoftP4D"
+                android:id="@+id/check_edit_Exp_SoftP4D"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Pix4D"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkExpSoftAC" />
+                app:layout_constraintTop_toBottomOf="@+id/check_edit_Exp_SoftAC" />
 
             <CheckBox
-                android:id="@+id/checkExpSoftBTG"
+                android:id="@+id/check_edit_Exp_SoftBTG"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:text="TopoGRAPH"
                 app:layout_constraintEnd_toStartOf="@+id/guideline3"
                 app:layout_constraintStart_toStartOf="@+id/guideline4"
-                app:layout_constraintTop_toBottomOf="@+id/checkExpSoftACC3D" />
+                app:layout_constraintTop_toBottomOf="@+id/check_edit_Exp_SoftACC3D" />
 
             <CheckBox
-                android:id="@+id/checkExpSoftRe"
+                android:id="@+id/check_edit_Exp_SoftRe"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
@@ -643,24 +643,24 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
             <CheckBox
-                android:id="@+id/checkExpSoftAG"
+                android:id="@+id/check_edit_Exp_SoftAG"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="ArcGis"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkExpSoftP4D" />
+                app:layout_constraintTop_toBottomOf="@+id/check_edit_Exp_SoftP4D" />
 
             <CheckBox
-                android:id="@+id/checkExpSoftTBC"
+                android:id="@+id/check_edit_Exp_SoftTBC"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="Trimble"
                 app:layout_constraintStart_toStartOf="@+id/guideline4"
-                app:layout_constraintTop_toBottomOf="@+id/checkExpSoftBTG" />
+                app:layout_constraintTop_toBottomOf="@+id/check_edit_Exp_SoftBTG" />
 
             <CheckBox
-                android:id="@+id/checkExpSoftQG"
+                android:id="@+id/check_edit_Exp_SoftQG"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
@@ -668,35 +668,35 @@
                 android:text="Qgis"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
-                app:layout_constraintTop_toBottomOf="@+id/checkExpSoftRe" />
+                app:layout_constraintTop_toBottomOf="@+id/check_edit_Exp_SoftRe" />
 
             <CheckBox
-                android:id="@+id/checkExpSoftTT"
+                android:id="@+id/check_edit_Exp_SoftTT"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:text="TopconTools"
                 app:layout_constraintEnd_toStartOf="@+id/guideline5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkExpSoftAG" />
+                app:layout_constraintTop_toBottomOf="@+id/check_edit_Exp_SoftAG" />
 
             <CheckBox
-                android:id="@+id/checkExpSoftPS"
+                android:id="@+id/check_edit_Exp_SoftPS"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="PhotoSCAN"
                 app:layout_constraintStart_toStartOf="@+id/guideline4"
-                app:layout_constraintTop_toBottomOf="@+id/checkExpSoftTBC" />
+                app:layout_constraintTop_toBottomOf="@+id/check_edit_Exp_SoftTBC" />
 
             <CheckBox
-                android:id="@+id/checkExpSoftGM"
+                android:id="@+id/check_edit_Exp_SoftGM"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:text="GlobalMapper"
                 app:layout_constraintEnd_toStartOf="@+id/guideline5"
                 app:layout_constraintStart_toStartOf="@+id/view7"
-                app:layout_constraintTop_toBottomOf="@+id/checkExpSoftTT" />
+                app:layout_constraintTop_toBottomOf="@+id/check_edit_Exp_SoftTT" />
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/textInputLayout15"
@@ -706,7 +706,7 @@
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkExpSoftGM">
+                app:layout_constraintTop_toBottomOf="@+id/check_edit_Exp_SoftGM">
 
                 <com.beardedhen.androidbootstrap.BootstrapEditText
                     android:id="@+id/edtCadExpSoft"

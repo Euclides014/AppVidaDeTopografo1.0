@@ -37,7 +37,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
-import com.beardedhen.androidbootstrap.BootstrapDropDown;
 import com.beardedhen.androidbootstrap.BootstrapEditText;
 import com.example.applicationvidadetopografo.Classes.Endereco;
 import com.example.applicationvidadetopografo.Classes.Usuario;
@@ -51,15 +50,10 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.SettingsClient;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -72,7 +66,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-import java.util.regex.Pattern;
 
 import static com.google.android.gms.location.LocationServices.getFusedLocationProviderClient;
 
@@ -306,18 +299,18 @@ public class FormularioActivity extends AppCompatActivity {
 
         //valores das CheckBox Experiencia em software
 
-        checkExpSoftAC = (CheckBox) findViewById(R.id.checkExpSoftAC);
-        checkExpSoftACC3D = (CheckBox) findViewById(R.id.checkExpSoftACC3D);
-        checkExpSoftTEVN = (CheckBox) findViewById(R.id.checkExpSoftTEVN);
-        checkExpSoftP4D = (CheckBox) findViewById(R.id.checkExpSoftP4D);
-        checkExpSoftBTG = (CheckBox) findViewById(R.id.checkExpSoftBTG);
-        checkExpSoftRe = (CheckBox) findViewById(R.id.checkExpSoftRe);
-        checkExpSoftAG = (CheckBox) findViewById(R.id.checkExpSoftAG);
-        checkExpSoftTBC = (CheckBox) findViewById(R.id.checkExpSoftTBC);
-        checkExpSoftQG = (CheckBox) findViewById(R.id.checkExpSoftQG);
-        checkExpSoftTT = (CheckBox) findViewById(R.id.checkExpSoftTT);
-        checkExpSoftPS = (CheckBox) findViewById(R.id.checkExpSoftPS);
-        checkExpSoftGM = (CheckBox) findViewById(R.id.checkExpSoftGM);
+        checkExpSoftAC = (CheckBox) findViewById(R.id.check_edit_Exp_SoftAC);
+        checkExpSoftACC3D = (CheckBox) findViewById(R.id.check_edit_Exp_SoftACC3D);
+        checkExpSoftTEVN = (CheckBox) findViewById(R.id.check_edit_Exp_SoftTEVN);
+        checkExpSoftP4D = (CheckBox) findViewById(R.id.check_edit_Exp_SoftP4D);
+        checkExpSoftBTG = (CheckBox) findViewById(R.id.check_edit_Exp_SoftBTG);
+        checkExpSoftRe = (CheckBox) findViewById(R.id.check_edit_Exp_SoftRe);
+        checkExpSoftAG = (CheckBox) findViewById(R.id.check_edit_Exp_SoftAG);
+        checkExpSoftTBC = (CheckBox) findViewById(R.id.check_edit_Exp_SoftTBC);
+        checkExpSoftQG = (CheckBox) findViewById(R.id.check_edit_Exp_SoftQG);
+        checkExpSoftTT = (CheckBox) findViewById(R.id.check_edit_Exp_SoftTT);
+        checkExpSoftPS = (CheckBox) findViewById(R.id.check_edit_Exp_SoftPS);
+        checkExpSoftGM = (CheckBox) findViewById(R.id.check_edit_Exp_SoftGM);
 
         rbDisp = (RadioButton) findViewById(R.id.rbDisp);
         rbNDisp = (RadioButton) findViewById(R.id.rbNDisp);

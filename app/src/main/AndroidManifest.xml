@@ -23,19 +23,20 @@
         android:roundIcon="@drawable/icon_app"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".Activity.ResetActivity"
-                  android:theme="@style/AppTheme.NoActionBar"/>
-
-        <activity android:name=".Activity.PerfilUsersActivity"
-                  android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".Activity.EditPerfilActivity"></activity>
+        <activity
+            android:name=".Activity.ResetActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.PerfilUsersActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
             android:name="android.app.default_searchable"
             android:value=".Activity.SearchableActivity" />
 
         <provider
-            android:name="com.example.applicationvidadetopografo.Providers.SearchableProvider"
+            android:name=".Providers.SearchableProvider"
             android:authorities="com.example.applicationvidadetopografo.Providers.SearchableProvider" />
 
         <activity
@@ -51,9 +52,9 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity android:name=".Activity.PerfilUsuarioActivity" />
-
-        <activity android:name=".Activity.GaleriaEbookActivity"
-                  android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".Activity.GaleriaEbookActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -87,8 +88,8 @@
             android:windowSoftInputMode="adjustPan|adjustNothing" />
         <activity
             android:name=".Activity.FormularioActivity"
-            android:windowSoftInputMode="adjustPan|adjustNothing"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan|adjustNothing" />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -97,8 +98,9 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".Activity.CadastroUsuarioActivity"
-                  android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".Activity.CadastroUsuarioActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
