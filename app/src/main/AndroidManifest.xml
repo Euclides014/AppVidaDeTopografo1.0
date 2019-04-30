@@ -102,8 +102,8 @@
             android:name=".Activity.CadastroUsuarioActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Activity.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".Activity.IntroActivity"
+            android:theme="@style/Theme.Intro"
             android:windowSoftInputMode="adjustPan|adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -111,6 +111,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <activity android:name=".Activity.MainActivity"
+                  android:theme="@style/AppTheme.NoActionBar"
+                  android:windowSoftInputMode="adjustPan|adjustNothing"/>
     </application>
 
 </manifest>

@@ -329,10 +329,8 @@ public class FormularioActivity extends AppCompatActivity {
         usuario.setCpf(cpf.getText().toString());
         usuario.setDataNascimento(dataNascimento.getText().toString());
         usuario.setTempodeexperiencia((tempoDeExp + "anos"));
-        if (edtCadInfor.getText() == null) {
-            edtCadInfor.setText("");
-        }
         usuario.setInforAdicionais(edtCadInfor.getText().toString());
+        usuario.setCep(cep.getText().toString());
         usuario.setRua(rua.getText().toString());
         usuario.setNumero(numero.getText().toString());
         usuario.setBairro(bairro.getText().toString());

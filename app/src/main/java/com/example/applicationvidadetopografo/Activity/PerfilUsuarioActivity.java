@@ -159,7 +159,7 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.ic_edit_perfil){
-
+            editarPerfilUser();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -185,10 +185,6 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
 
     }
 
-    private void goToEditPerfil(){
-
-    }
-
     private void editarPerfilUser(){
         String emailUserLog = autenticacao.getCurrentUser().getEmail();
         reference = ConfiguracaoFirebase.getFirebase();
@@ -202,16 +198,24 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
                             final Bundle bundle = new Bundle();
                             bundle.putString("origem", "editarUsuario");
 
-                            bundle.putString("origem", "editarUsuario");
-                            bundle.putString("origem", "editarUsuario");
-                            bundle.putString("origem", "editarUsuario");
-                            bundle.putString("origem", "editarUsuario");
-                            bundle.putString("origem", "editarUsuario");
-                            bundle.putString("origem", "editarUsuario");
-                            bundle.putString("origem", "editarUsuario");
-                            bundle.putString("origem", "editarUsuario");
-                            bundle.putString("origem", "editarUsuario");
-                            bundle.putString("origem", "editarUsuario");
+                            bundle.putString("nome", usuario.getNome());
+                            bundle.putString("email", usuario.getEmail());
+                            bundle.putString("CPF", usuario.getCpf());
+                            bundle.putString("DataNasc", usuario.getDataNascimento());
+                            bundle.putString("telefone", usuario.getTelefone());
+                            bundle.putString("CEP", usuario.getCep());
+                            bundle.putString("endereco", usuario.getRua());
+                            bundle.putString("numero", usuario.getNumero());
+                            bundle.putString("bairro", usuario.getBairro());
+                            bundle.putString("cidade", usuario.getCidade());
+                            bundle.putString("estado", usuario.getEstado());
+                            bundle.putString("keyUsuario", usuario.getKeyUsuario());
+                            bundle.putStringArrayList("listaContrato", usuario.getTipodecontrato());
+                            bundle.putStringArrayList("listaMobilidade", usuario.getVeiculo());
+
+
+                            intent.putExtras(bundle);
+                            startActivity(intent);
 
                         }
                     }
