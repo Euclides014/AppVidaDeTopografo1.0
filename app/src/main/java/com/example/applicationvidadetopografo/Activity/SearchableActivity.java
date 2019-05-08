@@ -293,6 +293,8 @@ public class SearchableActivity extends AppCompatActivity implements OnMapReadyC
                 Address address = addresses.get(0);
                 endLat = address.getLatitude();
                 endLong = address.getLongitude();
+                LatLng zoomFilter = new LatLng(endLat, endLong);
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(zoomFilter, 10));
             } else {
                 Toast.makeText(this, "Sem resultados para pesquisa", Toast.LENGTH_LONG).show();
             }
@@ -313,9 +315,6 @@ public class SearchableActivity extends AppCompatActivity implements OnMapReadyC
             mMap.clear();
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(zoomFilter, 10));
             Toast.makeText(this, "Sem resultados para pesquisa", Toast.LENGTH_LONG).show();
-        } else {
-            LatLng zoomFilter = new LatLng(endLat, endLong);
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(zoomFilter, 10));
         }
     }
 

@@ -15,8 +15,9 @@
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="16dp"
+        android:textColorHint="@color/bootstrap_alert_cross_default"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,6 +29,7 @@
             android:layout_height="wrap_content"
             android:hint="Email:"
             android:inputType="textEmailAddress"
+            android:textColorHint="@color/coloIntro1"
             app:bootstrapBrand="info"
             app:bootstrapSize="md"
             app:roundedCorners="true" />
@@ -39,12 +41,13 @@
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:textColorHint="@color/bootstrap_alert_cross_default"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
         app:passwordToggleEnabled="true"
-        app:passwordToggleTint="@color/colorPrimary"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+        app:passwordToggleTint="@color/colorPrimary">
 
         <com.beardedhen.androidbootstrap.BootstrapEditText
             android:id="@+id/edtSenha"
@@ -52,6 +55,7 @@
             android:layout_height="wrap_content"
             android:hint="Senha:"
             android:inputType="textPassword"
+            android:textColorHint="@color/bootstrap_alert_cross_default"
             app:bootstrapBrand="info"
             app:bootstrapSize="md"
             app:roundedCorners="true" />
@@ -61,16 +65,16 @@
         android:id="@+id/btnLoginMail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/myrect"
         android:elevation="2dp"
         android:text="Login"
-        app:bootstrapSize="md"
+        app:bootstrapSize="lg"
         app:buttonMode="regular"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txt_rec_pass"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
         app:roundedCorners="true"
         app:showOutline="false" />
@@ -92,14 +96,16 @@
         android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:text="OU"
         android:textAlignment="center"
         android:textColor="@color/bootstrap_brand_secondary_fill"
         android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline7"
         app:layout_constraintEnd_toStartOf="@+id/view4"
         app:layout_constraintStart_toEndOf="@+id/view3"
-        app:layout_constraintTop_toBottomOf="@+id/btnLoginMail" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_rec_pass" />
 
     <View
         android:id="@+id/view4"
@@ -117,35 +123,45 @@
     <com.google.android.gms.common.SignInButton
         android:id="@+id/login_googlebutton"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/loginButtonFacebook"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline7" />
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/loginButtonFacebook"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="63dp"
         android:layout_gravity="center"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
-        android:padding="5dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="18dp"
+        android:drawablePadding="20dp"
+        android:paddingLeft="12dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/login_googlebutton"
-        app:layout_constraintTop_toTopOf="@+id/guideline7" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_googlebutton" />
+
 
     <TextView
         android:id="@+id/textCadastrarUsuario"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
         android:text="Clique aqui para realizar seu cadastro"
         android:textColor="@color/bootstrap_brand_secondary_fill"
         android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginButtonFacebook" />
@@ -160,14 +176,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/icon_tela_login" />
+        app:srcCompat="@drawable/logo_app" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.59" />
+        app:layout_constraintGuide_percent="0.57" />
 
     <TextView
         android:id="@+id/txt_rec_pass"
@@ -178,7 +194,7 @@
         android:text="Esqueceu sua senha?"
         android:textColor="@color/bootstrap_brand_secondary_fill"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+        app:layout_constraintTop_toBottomOf="@+id/btnLoginMail" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -111,7 +111,7 @@ public class FormularioActivity extends AppCompatActivity {
     private Double latitude;
     private ImageView imageView, btnCalendar, selectDoc;
     private TextView exibirData, txt_name_arq;
-    private String emailUsuarioLogado;
+    private String emailUsuarioLogado, endereçoToLoc, auxFormation;
     private int tempoDeExp;
     private FirebaseAuth autenticacao;
     private StorageReference storageReference;
@@ -119,7 +119,6 @@ public class FormularioActivity extends AppCompatActivity {
     private DatabaseReference reference;
     private Usuario usuario;
     private Endereco endereco;
-    private String endereçoToLoc;
     private Util util;
     Uri pdfURI;
     private Double endLat, endLong;
@@ -174,6 +173,19 @@ public class FormularioActivity extends AppCompatActivity {
                 R.id.edtCadtBairro,
                 R.id.edtCadtCidade,
                 R.id.edtCadtEstado);
+
+        final AdapterView.OnItemSelectedListener formationSelect = new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                auxFormation = selectEscolaridade.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        };
+        selectEscolaridade.setOnItemSelectedListener( formationSelect );
 
         btnConclui = (BootstrapButton) findViewById(R.id.btnConclui);
         btnCancel = (BootstrapButton) findViewById(R.id.btnCancel);
@@ -254,11 +266,9 @@ public class FormularioActivity extends AppCompatActivity {
         estado = (BootstrapEditText) findViewById(R.id.edtCadtEstado);
         edtCadInfor = findViewById(R.id.edtCadInfor);
         edtCadExpSoft = (BootstrapEditText) findViewById(R.id.edtCadExpSoft);
-        selectEscolaridade = findViewById(R.id.selecEscolaridade);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter
-                .createFromResource(this, R.array.bootstrap_dropdown_example_data,
-                        android.R.layout.simple_spinner_dropdown_item);
-        selectEscolaridade.setAdapter(adapter);
+        selectEscolaridade = findViewById(R.id.spin_Formation);
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.select_formation, android.R.layout.simple_spinner_item);
+        selectEscolaridade.setAdapter( adapter );
 
         //valores das Checkbox ocupacao
 
@@ -328,7 +338,8 @@ public class FormularioActivity extends AppCompatActivity {
         usuario.setTelefone(telefone.getText().toString());
         usuario.setCpf(cpf.getText().toString());
         usuario.setDataNascimento(dataNascimento.getText().toString());
-        usuario.setTempodeexperiencia((tempoDeExp + "anos"));
+        usuario.setTempodeexperiencia((tempoDeExp+" "+"anos"));
+        usuario.setFormacao(auxFormation);
         usuario.setInforAdicionais(edtCadInfor.getText().toString());
         usuario.setCep(cep.getText().toString());
         usuario.setRua(rua.getText().toString());
@@ -337,17 +348,7 @@ public class FormularioActivity extends AppCompatActivity {
         usuario.setCidade(cidade.getText().toString());
         usuario.setEstado(estado.getText().toString());
         usuario.setTipoUsuario("Comum");
-        selectEscolaridade.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                usuario.setFormacao(parent.getOnItemClickListener().toString());
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         if (rbDisp.isChecked()) {
             usuario.setDispViagem("Disponível para viagem");

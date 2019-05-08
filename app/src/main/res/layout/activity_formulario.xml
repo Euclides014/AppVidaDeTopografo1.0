@@ -27,8 +27,9 @@
                 android:id="@+id/imagePerfil"
                 android:layout_width="130dp"
                 android:layout_height="140dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:contentDescription="Insira sua foto"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -99,9 +100,11 @@
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/textInputLayout4"
-                android:layout_width="161dp"
+                android:layout_width="0dp"
                 android:layout_height="41dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="5dp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
 
@@ -120,11 +123,11 @@
                 android:id="@+id/textInputLayout5"
                 android:layout_width="0dp"
                 android:layout_height="42dp"
-                android:layout_marginStart="6dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textInputLayout4"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
 
                 <com.beardedhen.androidbootstrap.BootstrapEditText
@@ -142,6 +145,7 @@
                 android:id="@+id/textView3"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="13dp"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/bar_div_form"
@@ -159,6 +163,7 @@
                 android:id="@+id/textInputLayout6"
                 android:layout_width="0dp"
                 android:layout_height="46dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -180,8 +185,8 @@
                 android:id="@+id/textInputLayout7"
                 android:layout_width="0dp"
                 android:layout_height="45dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="2dp"
-                android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline3"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout6">
@@ -200,11 +205,11 @@
                 android:id="@+id/textInputLayout8"
                 android:layout_width="0dp"
                 android:layout_height="45dp"
-                android:layout_marginStart="6dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textInputLayout7"
+                app:layout_constraintStart_toStartOf="@+id/guideline3"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout6">
 
                 <com.beardedhen.androidbootstrap.BootstrapEditText
@@ -222,9 +227,9 @@
                 android:id="@+id/textInputLayout10"
                 android:layout_width="0dp"
                 android:layout_height="46dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="2dp"
-                android:layout_marginEnd="6dp"
-                app:layout_constraintEnd_toStartOf="@+id/textInputLayout9"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout7">
 
@@ -242,11 +247,11 @@
                 android:id="@+id/textInputLayout9"
                 android:layout_width="0dp"
                 android:layout_height="46dp"
-                android:layout_marginStart="6dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textInputLayout10"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout7">
 
                 <com.beardedhen.androidbootstrap.BootstrapEditText
@@ -263,6 +268,7 @@
                 android:id="@+id/textInputLayout11"
                 android:layout_width="0dp"
                 android:layout_height="47dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -283,7 +289,7 @@
                 android:id="@+id/textView4"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
-                android:layout_marginStart="3dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="1dp"
                 android:gravity="center"
                 android:text="Localização: "
@@ -295,6 +301,7 @@
                 android:id="@+id/textView5"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/bar_div_form"
@@ -312,7 +319,7 @@
                 android:id="@+id/textView7"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:text="Ocupação:"
                 android:textSize="14sp"
@@ -333,9 +340,10 @@
                 android:id="@+id/checkTopo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="2dp"
                 android:text="Topógrafo"
+                app:layout_constraintEnd_toStartOf="@+id/guideline5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -343,18 +351,19 @@
                 android:id="@+id/checkNivl"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
                 android:text="Nivelador"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/checkDesen" />
 
             <CheckBox
                 android:id="@+id/checkDesen"
-                android:layout_width="105dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
                 android:text="Desenhista/Projetista"
+                app:layout_constraintEnd_toStartOf="@+id/guideline5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/checkTopo" />
 
@@ -363,31 +372,18 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:text="Piloto de Drone"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
                 app:layout_constraintStart_toStartOf="@+id/guideline5"
                 app:layout_constraintTop_toBottomOf="@+id/checkAux" />
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/SelectEscolaridade"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnCalendar">
-
-                <Spinner
-                    android:id="@+id/selecEscolaridade"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            </android.support.design.widget.TextInputLayout>
 
             <TextView
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="33dp"
-                android:layout_marginStart="3dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:gravity="center|left"
                 android:text="Tipo de Contratação:"
                 android:textSize="14sp"
@@ -400,7 +396,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="6dp"
+                android:layout_marginEnd="8dp"
                 android:text="CLT"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
                 app:layout_constraintStart_toStartOf="@+id/guideline5"
                 app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -408,9 +406,10 @@
                 android:id="@+id/checkFreelancer"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="6dp"
                 android:text="Freelancer"
+                app:layout_constraintEnd_toStartOf="@+id/guideline5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -418,17 +417,19 @@
                 android:id="@+id/checkPJ"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="6dp"
+                android:layout_marginEnd="8dp"
                 android:text="PJ"
-                app:layout_constraintStart_toEndOf="@+id/guideline"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline3"
                 app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
             <TextView
                 android:id="@+id/textView9"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:text="Possui equipamento? Selecione:"
                 android:textSize="14sp"
@@ -437,10 +438,13 @@
 
             <CheckBox
                 android:id="@+id/checkReceptor"
-                android:layout_width="134dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:text="Receptor GNSS de Navegação"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
@@ -449,18 +453,21 @@
                 android:layout_width="0dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:text="Estação Total"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/checkReceptor"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
             <CheckBox
                 android:id="@+id/checkReceptorGeodesico"
-                android:layout_width="134dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
                 android:text="Receptor GNSS Geodésico"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/checkReceptor" />
 
@@ -469,16 +476,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:text="VANT/Drone"
-                app:layout_constraintStart_toEndOf="@+id/checkReceptor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/checkEstacao" />
 
             <CheckBox
                 android:id="@+id/checkNivel"
-                android:layout_width="134dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
                 android:text="Nível Topográfico"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/checkReceptorGeodesico" />
 
@@ -487,16 +498,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:text="Teodolito"
-                app:layout_constraintStart_toEndOf="@+id/checkReceptorGeodesico"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/checkDrone" />
 
             <CheckBox
                 android:id="@+id/checkBox4"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
                 android:text="LaiserSCAN"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/checkNivel" />
 
@@ -504,18 +519,24 @@
                 android:id="@+id/textView10"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:text="Quais equipamentos você tem experiência?"
                 android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view7" />
 
             <CheckBox
                 android:id="@+id/checkExpRGN"
-                android:layout_width="135dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:text="Receptor GNSS de Navegação"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
@@ -524,16 +545,21 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:text="Estação Total"
-                app:layout_constraintStart_toEndOf="@+id/checkExpRGN"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
             <CheckBox
                 android:id="@+id/checkExpRGG"
-                android:layout_width="135dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
                 android:text="Receptor GNSS Geodésico"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/checkExpRGN" />
 
@@ -542,16 +568,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:text="VANT/Drone"
-                app:layout_constraintStart_toEndOf="@+id/guideline5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/checkExpET" />
 
             <CheckBox
                 android:id="@+id/checkExpNT"
-                android:layout_width="135dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
                 android:text="Nível Topográfico"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/checkExpRGG" />
 
@@ -560,18 +590,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="6dp"
+                android:layout_marginEnd="8dp"
                 android:text="Teodolito"
-                app:layout_constraintStart_toEndOf="@+id/guideline5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/checkExpVantDrone" />
 
             <CheckBox
                 android:id="@+id/checkBox5"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginEnd="8dp"
                 android:text="LaiserSCAN"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/checkExpNT" />
 
@@ -579,9 +611,12 @@
                 android:id="@+id/textView11"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:text="Software ja trabalhados, selecione:"
                 android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view8" />
 
@@ -589,7 +624,10 @@
                 android:id="@+id/check_edit_Exp_SoftAC"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:text="AutoCad"
+                app:layout_constraintEnd_toStartOf="@+id/guideline5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
@@ -597,26 +635,30 @@
                 android:id="@+id/check_edit_Exp_SoftACC3D"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:text="AutoCad Civil 3d"
                 app:layout_constraintEnd_toStartOf="@+id/guideline3"
-                app:layout_constraintStart_toStartOf="@+id/guideline4"
+                app:layout_constraintStart_toStartOf="@+id/guideline5"
                 app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
             <CheckBox
                 android:id="@+id/check_edit_Exp_SoftTEVN"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginStart="8dp"
                 android:text="TopoEVN"
-                app:layout_constraintStart_toStartOf="@+id/guideline4"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                app:layout_constraintStart_toStartOf="@+id/guideline5"
                 app:layout_constraintTop_toBottomOf="@+id/check_edit_Exp_SoftPS" />
 
             <CheckBox
                 android:id="@+id/check_edit_Exp_SoftP4D"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:text="Pix4D"
+                app:layout_constraintEnd_toStartOf="@+id/guideline5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/check_edit_Exp_SoftAC" />
 
@@ -624,28 +666,19 @@
                 android:id="@+id/check_edit_Exp_SoftBTG"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
                 android:text="TopoGRAPH"
                 app:layout_constraintEnd_toStartOf="@+id/guideline3"
-                app:layout_constraintStart_toStartOf="@+id/guideline4"
+                app:layout_constraintStart_toStartOf="@+id/guideline5"
                 app:layout_constraintTop_toBottomOf="@+id/check_edit_Exp_SoftACC3D" />
-
-            <CheckBox
-                android:id="@+id/check_edit_Exp_SoftRe"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="2dp"
-                android:text="Revit"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/guideline"
-                app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
             <CheckBox
                 android:id="@+id/check_edit_Exp_SoftAG"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:text="ArcGis"
+                app:layout_constraintEnd_toStartOf="@+id/guideline5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/check_edit_Exp_SoftP4D" />
 
@@ -653,27 +686,28 @@
                 android:id="@+id/check_edit_Exp_SoftTBC"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginStart="8dp"
                 android:text="Trimble"
-                app:layout_constraintStart_toStartOf="@+id/guideline4"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                app:layout_constraintStart_toStartOf="@+id/guideline5"
                 app:layout_constraintTop_toBottomOf="@+id/check_edit_Exp_SoftBTG" />
 
             <CheckBox
                 android:id="@+id/check_edit_Exp_SoftQG"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:text="Qgis"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="@+id/guideline3"
                 app:layout_constraintTop_toBottomOf="@+id/check_edit_Exp_SoftRe" />
 
             <CheckBox
                 android:id="@+id/check_edit_Exp_SoftTT"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="16dp"
                 android:text="TopconTools"
                 app:layout_constraintEnd_toStartOf="@+id/guideline5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -683,24 +717,39 @@
                 android:id="@+id/check_edit_Exp_SoftPS"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:text="PhotoSCAN"
-                app:layout_constraintStart_toStartOf="@+id/guideline4"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                app:layout_constraintStart_toStartOf="@+id/guideline5"
                 app:layout_constraintTop_toBottomOf="@+id/check_edit_Exp_SoftTBC" />
 
             <CheckBox
                 android:id="@+id/check_edit_Exp_SoftGM"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="16dp"
                 android:text="GlobalMapper"
                 app:layout_constraintEnd_toStartOf="@+id/guideline5"
-                app:layout_constraintStart_toStartOf="@+id/view7"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/check_edit_Exp_SoftTT" />
+
+            <CheckBox
+                android:id="@+id/check_edit_Exp_SoftRe"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="Revit"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline3"
+                app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/textInputLayout15"
                 android:layout_width="0dp"
                 android:layout_height="46dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -720,25 +769,27 @@
 
             <TextView
                 android:id="@+id/textView12"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="46dp"
-                android:layout_marginStart="3dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:gravity="center|left"
                 android:text="Disponibilidade para viagem?"
                 android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view9" />
 
             <RadioGroup
                 android:id="@+id/radioGroup2"
-                android:layout_width="79dp"
+                android:layout_width="0dp"
                 android:layout_height="51dp"
-                android:layout_marginStart="7dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="6dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView12"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/view9">
 
                 <RadioButton
@@ -760,10 +811,12 @@
                 android:id="@+id/textInputLayout16"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView12">
+                app:layout_constraintTop_toBottomOf="@+id/radioGroup2">
 
                 <com.beardedhen.androidbootstrap.BootstrapEditText
                     android:id="@+id/edtCadInfor"
@@ -779,47 +832,55 @@
                 android:id="@+id/textView13"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:gravity="center|left"
                 android:text="Possui veiculo proprio? Informe:"
                 android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view10" />
 
             <CheckBox
                 android:id="@+id/checkMoto"
-                android:layout_width="77dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:text="Moto"
+                app:layout_constraintEnd_toStartOf="@+id/guideline5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
             <CheckBox
                 android:id="@+id/checkCarro"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="14dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:text="Carro"
-                app:layout_constraintStart_toEndOf="@+id/checkMoto"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                app:layout_constraintStart_toStartOf="@+id/guideline5"
                 app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
             <CheckBox
                 android:id="@+id/checkCarroOFFRoad"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="23dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:text="Carro 4X4"
-                app:layout_constraintStart_toEndOf="@+id/checkCarro"
+                app:layout_constraintStart_toStartOf="@+id/guideline3"
                 app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
             <com.beardedhen.androidbootstrap.BootstrapButton
                 android:id="@+id/btnConclui"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="8dp"
                 android:text="Concluido"
@@ -834,6 +895,7 @@
                 android:id="@+id/btnCancel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="16dp"
@@ -850,17 +912,20 @@
                 android:id="@+id/view"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:background="@color/bootstrap_gray_dark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/SelectEscolaridade" />
+                app:layout_constraintTop_toBottomOf="@+id/spin_Formation" />
 
             <View
                 android:id="@+id/view2"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="1dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:background="@color/bootstrap_gray_dark"
@@ -872,6 +937,8 @@
                 android:id="@+id/view5"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:background="@color/bootstrap_gray_dark"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -882,52 +949,35 @@
                 android:id="@+id/view6"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:background="@color/bootstrap_gray_dark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/checkFreelancer" />
 
             <android.support.constraint.Guideline
-                android:id="@+id/guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="222dp" />
-
-            <android.support.constraint.Guideline
-                android:id="@+id/guideline2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="198dp" />
-
-            <android.support.constraint.Guideline
                 android:id="@+id/guideline3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="239dp" />
-
-            <android.support.constraint.Guideline
-                android:id="@+id/guideline4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_end="209dp" />
+                app:layout_constraintGuide_percent="0.6638889" />
 
             <android.support.constraint.Guideline
                 android:id="@+id/guideline5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="135dp" />
+                app:layout_constraintGuide_percent="0.33" />
 
             <View
                 android:id="@+id/view7"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="1dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:background="@color/bootstrap_gray_dark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -935,9 +985,11 @@
 
             <View
                 android:id="@+id/view8"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="1dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:background="@color/bootstrap_gray_dark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -945,9 +997,11 @@
 
             <View
                 android:id="@+id/view9"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="1dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:background="@color/bootstrap_gray_dark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -957,7 +1011,9 @@
                 android:id="@+id/view10"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:background="@color/bootstrap_gray_dark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -967,7 +1023,9 @@
                 android:id="@+id/view11"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:background="@color/bootstrap_gray_dark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -977,8 +1035,10 @@
                 android:id="@+id/radioGroup"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView4"
+                app:layout_constraintStart_toStartOf="@+id/guideline5"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout11">
 
                 <RadioButton
@@ -1000,8 +1060,8 @@
                 android:id="@+id/textView21"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:text="Trabalha deste:"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view5" />
@@ -1010,7 +1070,7 @@
                 android:id="@+id/btnCalendar"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="17dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view5"
@@ -1021,7 +1081,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toStartOf="@+id/btnCalendar"
                 app:layout_constraintStart_toEndOf="@+id/textView21"
@@ -1031,7 +1091,7 @@
                 android:id="@+id/img_select_arq"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:contentDescription="Clique aqui para selecionar o arquivo"
                 app:layout_constraintStart_toStartOf="parent"
@@ -1040,42 +1100,55 @@
 
             <TextView
                 android:id="@+id/textView26"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:text="Envie seu currículo:"
-                app:layout_constraintStart_toStartOf="@+id/view11"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view11" />
 
             <TextView
                 android:id="@+id/textView29"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:text="Arquivo Selecionado:"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/img_select_arq"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                app:layout_constraintStart_toStartOf="@+id/guideline5"
                 app:layout_constraintTop_toBottomOf="@+id/textView26" />
 
             <TextView
                 android:id="@+id/txt_name_arq"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/img_select_arq"
+                app:layout_constraintStart_toStartOf="@+id/guideline5"
                 app:layout_constraintTop_toBottomOf="@+id/textView29" />
 
             <android.support.constraint.Guideline
-                android:id="@+id/guideline6"
+                android:id="@+id/guideline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_end="324dp" />
+                app:layout_constraintGuide_percent="0.5" />
+
+            <Spinner
+                android:id="@+id/spin_Formation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnCalendar" />
 
 
         </android.support.constraint.ConstraintLayout>

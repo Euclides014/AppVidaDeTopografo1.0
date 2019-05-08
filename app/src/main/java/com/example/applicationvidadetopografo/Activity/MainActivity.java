@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         btnLogin = (BootstrapButton) findViewById(R.id.btnLoginMail);
 
         autenticacao = FirebaseAuth.getInstance();
-        login_googlebutton = (SignInButton) findViewById(R.id.login_googlebutton);
+        login_googlebutton = findViewById(R.id.login_googlebutton);
 
         loginButtonFacebook = (LoginButton) findViewById(R.id.loginButtonFacebook);
         loginButtonFacebook.setReadPermissions("email", "public_profile");

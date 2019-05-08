@@ -19,7 +19,7 @@
     <string name="search_hint">Buscar</string>
     <string name="action_searchable_activity">Buscar</string>
     <string name="app_label">Vida de Topógrafo</string>
-    <string-array name="bootstrap_dropdown_example_data">
+    <string-array name="select_formation">
         <item>Selecione a escolaridade</item>
         <item>Pós-Graduação completa</item>
         <item>Pós-Graduação incompleta</item>
@@ -34,21 +34,21 @@
     <!-- TODO: Conteudo dos slides -->
     <string name="slide_1_title">Bem-Vindo ao Vida de Topográfo</string>
     <string name="slide_1_description">
-        O aplicativo "Vida de Topógrafo" ou nosso principal objetivo com o Vida de Topógrafo
-        /n
-        é criar uma rede de contatos com conexão direta entre profissionais e os contratantes
-        /n 
-        envolvidos com a topografia, servindo de vitrine para a partila de serviços e colaboração
-        /n
-        com os mais variados propositos.
+        Nosso principal objetivo é criar uma rede de contatos com
+        \n
+        conexão direta entre profissionais e os contratantes
+        \n
+        envolvidos com a topografia, servindo de vitrine para a partilha
+        \n
+        de serviços e colaboração com os mais variados propositos.
     </string>
 
     <string name="slide_2_title">Localização de Usúarios</string>
     <string name="slide_2_description">
         O aplicativo "Vida de Topógrafo" requer sua localização
-        /n
+        \n
         para exibir-la, e mostra a localização de outros profissionais
-        /n
+        \n
         do ramo de atuação.
     </string>
     <string name="grant_permissions">Liberar permissões</string>

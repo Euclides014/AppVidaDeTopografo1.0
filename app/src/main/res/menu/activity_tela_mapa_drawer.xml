@@ -25,6 +25,11 @@
             android:id="@+id/nav_contact"
             android:title="Contato"
             android:icon="@drawable/ic_support"/>
+        <item
+            android:title="Políticas de Privacidade"
+            android:id="@+id/nav_info"
+            android:icon="@drawable/ic_info_outline_white_24dp"
+        />
 
     </group>
 

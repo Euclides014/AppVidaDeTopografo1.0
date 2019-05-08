@@ -160,6 +160,8 @@ public class TelaMapaActivity extends AppCompatActivity
              startActivity(intent);
          } else if(id == R.id.nav_contact){
              mailToIntent ();
+         } else if ( id == R.id.nav_info){
+             gotoPolices();
          }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -248,5 +250,10 @@ public class TelaMapaActivity extends AppCompatActivity
         intent.putExtra(Intent.EXTRA_SUBJECT, "Suporte ao aplicativo");
         intent.setData(Uri.parse("mailto:gtalevantamentos@gmail.com"));
         startActivity(intent);
+    }
+
+    private void gotoPolices(){
+        Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.gtalevantamentos.com.br/app_vidadetopografo-politicas-de-privacidade/"));
+        startActivity(browser);
     }
 }
